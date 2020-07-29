@@ -20,6 +20,7 @@ const GET_POSTS = gql`
   }
 `
 
+
 export default () => {
   const { loading, error, data } = useQuery(GET_POSTS)
   const [open, setOpen] = useState(false);
@@ -36,7 +37,7 @@ export default () => {
         {data.posts.map((post, i) => (
             <Grid item xs={12} md={4}>
               <div key={i}>
-                <div>
+                <div>                
                 {post.name}
                 </div>
                 <div>

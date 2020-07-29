@@ -15,7 +15,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { Container } from "@material-ui/core";
 import InputBase from "@material-ui/core/InputBase";
 
-const drawerWidth = 210;
+const drawerWidth = 190;
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -76,29 +76,29 @@ const useStyles = makeStyles((theme) => ({
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
+    flexShrink: 0,    
   },
   drawerPaper: {
-    width: drawerWidth,
+    width: drawerWidth,    
   },
   drawerContainer: {
-    overflow: "auto",
+    overflow: "auto",  
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
   },
   titleText: {
-    textShadow: "2px 2px dodgerblue",
+    textShadow: "2px 2px black",    
   },
 }));
 
 const StyledListItemText = styled(ListItemText)({
-  marginLeft: "20%"
+  marginLeft: "20%",  
 });
 
 export const StyledA = styled.a`
-  textdecoration: "none";
+  textdecoration: "none";  
 `;
 
 export default function Header(props) {
@@ -112,9 +112,7 @@ export default function Header(props) {
           <Toolbar>
             <Typography className={classes.title} variant="h6" noWrap>
               <Link href="/">
-                <StyledA className={classes.titleText}>
-                  Threeveisgood's Portfolio
-                </StyledA>
+                <StyledA className={classes.titleText}>Threeveisgood</StyledA>
               </Link>
             </Typography>
             <div className={classes.search}>
@@ -122,7 +120,8 @@ export default function Header(props) {
                 <SearchIcon />
               </div>
               <InputBase
-                placeholder=""
+                placeholder="
+                Under construction"
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
@@ -143,7 +142,7 @@ export default function Header(props) {
       >
         <Toolbar />
         <div className={classes.drawerContainer}>
-          <List>            
+          <List>
             {[
               { title: "Pagination", Link: "/post" },
               { title: "Starred", Link: "/post" },
