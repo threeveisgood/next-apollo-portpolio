@@ -73,6 +73,7 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     height: "55px",
+    background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)'
   },
   drawer: {
     width: drawerWidth,
@@ -89,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   titleText: {
-    textShadow: "2px 2px black",    
+    color: 'beige'
   },
 }));
 

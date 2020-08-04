@@ -8,6 +8,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 import Layout from "../../components/layout";
+import AddPost from "../../components/addPost";
 
 const GET_POSTS = gql`
   query Posts {
@@ -19,7 +20,6 @@ const GET_POSTS = gql`
     }
   }
 `
-
 
 export default () => {
   const { loading, error, data } = useQuery(GET_POSTS)
@@ -46,11 +46,12 @@ export default () => {
                 <div>
                 {post.imgUrl}
                 </div>
-              </div>
+              </div>            
             </Grid>
-          ))}
-        </Grid>
-      </div>
+          ))}            
+        </Grid>                       
+        <AddPost /> 
+      </div>             
     </Layout>
   );
 };
