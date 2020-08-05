@@ -7,14 +7,12 @@ import * as Yup from "yup";
 import { makeStyles } from '@material-ui/core/styles';
 
 import {
-  Grid,
   Fab,
   Button,
   TextField,
   Dialog,
   DialogTitle,
   DialogContent,
-  Container
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -50,22 +48,13 @@ const ADD_POST = gql`
 
 export default () => {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  //const { loading, error, data } = useQuery(POSTS);
+  const [open, setOpen] = useState(false);  
   const [addPost] = useMutation(ADD_POST, {
-//    refetchQueries: ["Posts"],
+    refetchQueries: ["Posts"],
     onCompleted: (result) => {
       setOpen(false);
     },
   });
-
- /* if (loading)
-    return (
-      <ProgressWrapper>
-        <CircularProgress color="secondary" />
-      </ProgressWrapper>
-    );
-  if (error) return <p>Error Occured</p>; */
 
   const handleClose = () => setOpen(false);
 
