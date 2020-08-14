@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Grid, Fab, Button, TextField } from "@material-ui/core";
 import { useMutation, useLazyQuery, useQuery } from "@apollo/react-hooks";
-import  gql from 'graphql-tag'
+import gql from "graphql-tag";
 import { Link } from "next/link";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -19,13 +19,13 @@ const GET_POSTS = gql`
       imgUrl
     }
   }
-`
+`;
 
 export default () => {
-  const { loading, error, data } = useQuery(GET_POSTS)
+  const { loading, error, data } = useQuery(GET_POSTS);
   const [open, setOpen] = useState(false);
 
-  if (loading) return 'Loading...';
+  if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
   //const { users } = data
 
@@ -34,24 +34,19 @@ export default () => {
       <div>
         <h1>writePost</h1>
         <Grid container justify="flex-start" spacing={8}>
-        {data.posts.map((post, i) => (
+          {data.posts.map((post, i) => (
             <Grid item xs={12} md={4}>
               <div key={i}>
-                <div>                
-                {post.name}
-                </div>
-                <div>
-                {post.description}
-                </div>
-                <div>
-                {post.imgUrl}
-                </div>
-              </div>            
+                <div>{post.name}</div>
+                <div>{post.description}</div>
+                <div>{post.id}</div>
+                <div>{post.imgUrl}</div>
+              </div>
             </Grid>
-          ))}            
-        </Grid>                       
-        <AddPost /> 
-      </div>             
+          ))}
+        </Grid>
+        <AddPost />
+      </div>
     </Layout>
   );
 };

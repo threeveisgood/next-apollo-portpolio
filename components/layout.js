@@ -5,17 +5,22 @@ import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import styled from "styled-components";
 import SearchIcon from "@material-ui/icons/Search";
 import { Container } from "@material-ui/core";
 import InputBase from "@material-ui/core/InputBase";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Divider from '@material-ui/core/Divider';
 
-const drawerWidth = 190;
+function a11yProps(index) {
+  return {
+    id: `scrollable-auto-tab-${index}`,
+    "aria-controls": `scrollable-auto-tabpanel-${index}`,
+  };
+}
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -58,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     color: "inherit",
   },
   inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
+    /* padding: theme.spacing(1, 1, 1, 0), */
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
@@ -73,37 +78,34 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     height: "55px",
-    background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)'
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,    
-  },
-  drawerPaper: {
-    width: drawerWidth,    
-  },
-  drawerContainer: {
-    overflow: "auto",  
+    background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    marginTop: theme.spacing(7)
   },
   titleText: {
-    color: 'beige'
-  },
+    color: "beige",
+  }, 
 }));
 
 const StyledListItemText = styled(ListItemText)({
-  marginLeft: "20%",  
+  marginLeft: "20%",
 });
 
 export const StyledA = styled.a`
-  textdecoration: "none";  
+  textdecoration: "none";
 `;
 
 export default function Header(props) {
   const classes = useStyles();
+
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <div className={classes.root}>
@@ -132,44 +134,26 @@ export default function Header(props) {
             </div>
             <div className={classes.grow} />
           </Toolbar>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="scrollable auto tabs example"            
+          >
+            <Tab label="Post List" {...a11yProps(0)} />
+            <Tab label="Item Two" {...a11yProps(1)} />
+            <Tab label="Item Three" {...a11yProps(2)} />
+            <Tab label="Item Four" {...a11yProps(3)} />
+            <Tab label="Item Five" {...a11yProps(4)} />
+            <Tab label="Item Six" {...a11yProps(5)} />
+            <Tab label="Item Seven" {...a11yProps(6)} />
+          </Tabs>          
         </Container>
+        <Divider />
       </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <Toolbar />
-        <div className={classes.drawerContainer}>
-          <List>
-            {[
-              { title: "Pagination", Link: "/post" },
-              { title: "Starred", Link: "/post" },
-              { title: "Send Email", Link: "/post" },
-              { title: "Lego", Link: "/post" },
-            ].map((text, index) => (
-              <Link href={text.Link}>
-                <StyledA>
-                  <ListItem button key={text.title}>
-                    {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-                    <StyledListItemText primary={text.title} />
-                  </ListItem>
-                </StyledA>
-              </Link>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-              <ListItem button key={text}>
-                <StyledListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-        </div>
-      </Drawer>
       <main className={classes.content}>
         <Toolbar />
         {props.children}
