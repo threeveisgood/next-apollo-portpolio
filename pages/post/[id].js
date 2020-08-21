@@ -25,7 +25,6 @@ const ContainerDiv = styled.div({
 const Image = styled.img({
   maxWidth: "100%",  
 });
-const PostContainer = styled(Container)({});
 
 const ImageGrid = styled(Grid)({
   textAlign: "center"

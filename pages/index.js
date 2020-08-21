@@ -1,8 +1,6 @@
 import Head from "next/head";
-import { Container } from "@material-ui/core";
 import Layout from "../components/layout";
 import Typography from "@material-ui/core/Typography";
-import Toolbar from "@material-ui/core/Toolbar";
 
 export default function Home() {
   return (
@@ -11,7 +9,6 @@ export default function Home() {
         <title>Puro</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main>
         <Layout>
           <article>

@@ -7,13 +7,15 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import ListItemText from "@material-ui/core/ListItemText";
+import Grid from "@material-ui/core/Grid";
 import styled from "styled-components";
 import SearchIcon from "@material-ui/icons/Search";
-import { Container } from "@material-ui/core";
+import { Container, Paper } from "@material-ui/core";
 import InputBase from "@material-ui/core/InputBase";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Divider from '@material-ui/core/Divider';
+import Divider from "@material-ui/core/Divider";
+import { useRouter } from "next/router";
 
 function a11yProps(index) {
   return {
@@ -74,25 +76,30 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     display: "flex",
+    backgroundColor: "ghostwhite",
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     height: "55px",
     background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+    boxShadow: "none",
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    marginTop: theme.spacing(7)
+    marginTop: theme.spacing(7),
   },
   titleText: {
     color: "beige",
-  }, 
+  },
+  tabs: {
+    minHeight: "37px",
+    maxHeight: "37px",
+  },
+  wrapper: {
+    paddingBottom: "10px",
+  },
 }));
-
-const StyledListItemText = styled(ListItemText)({
-  marginLeft: "20%",
-});
 
 export const StyledA = styled.a`
   textdecoration: "none";
@@ -100,18 +107,40 @@ export const StyledA = styled.a`
 
 export default function Header(props) {
   const classes = useStyles();
+  const router = useRouter();
 
   const [value, setValue] = React.useState(0);
+
+  const tabs = [{
+    label: 'Post List',
+    link: '/post'
+  }, {
+    label: 'GraphQL',
+    link: '/post/5ef874da2ba15915f42606a7'
+  },
+  {
+    label: 'Post',
+    link: '/post'
+  },
+  {
+    label: 'Shift',
+    link: '/post/5ef874da2ba15915f42606a7'
+  }];
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const handleClick = (link, e) => {
+    e.preventDefault()
+    router.push(link);
+  };
+
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Container>
+      <CssBaseline />      
+      <AppBar position="fixed" className={classes.appBar}>        
+        <Container maxWidth="md">
           <Toolbar>
             <Typography className={classes.title} variant="h6" noWrap>
               <Link href="/">
@@ -134,25 +163,34 @@ export default function Header(props) {
             </div>
             <div className={classes.grow} />
           </Toolbar>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            variant="scrollable"
-            scrollButtons="auto"
-            aria-label="scrollable auto tabs example"            
-          >
-            <Tab label="Post List" {...a11yProps(0)} />
-            <Tab label="Item Two" {...a11yProps(1)} />
-            <Tab label="Item Three" {...a11yProps(2)} />
-            <Tab label="Item Four" {...a11yProps(3)} />
-            <Tab label="Item Five" {...a11yProps(4)} />
-            <Tab label="Item Six" {...a11yProps(5)} />
-            <Tab label="Item Seven" {...a11yProps(6)} />
-          </Tabs>          
-        </Container>
-        <Divider />
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="primary"
+              textColor="primary"
+              variant="scrollable"
+              scrollButtons="auto"
+              aria-label="scrollable auto tabs"
+              className={classes.tabs}          
+                     
+            >
+              {/*<Tab label="Post List" {...a11yProps(0)} onClick={handleClick} />
+              <Tab label="Item Two" {...a11yProps(1)} />
+              <Tab label="Item Three" {...a11yProps(2)} />
+              <Tab label="Item Four" {...a11yProps(3)} />
+              <Tab label="Item Five" {...a11yProps(4)} />
+              <Tab label="Item Six" {...a11yProps(5)} />
+              <Tab label="Item Seven" {...a11yProps(6)} /> */}
+              {tabs.map((tab, index) => (
+                <Tab                  
+                  label={tab.label}
+                  {...a11yProps(index)}
+                  onClick={(e) => handleClick(tab.link, e)}
+                />
+              ))}
+            </Tabs>
+        </Container>        
+        <Divider />        
       </AppBar>
       <main className={classes.content}>
         <Toolbar />
