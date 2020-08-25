@@ -32,7 +32,7 @@ const theme = createMuiTheme({
     },
     MuiTab: {
       root: {
-        textTransform: 'capitalize'
+        textTransform: 'none'
       },
       wrapper: {
         paddingBottom: '15px',        
@@ -40,7 +40,9 @@ const theme = createMuiTheme({
       textColorPrimary: {
         color: '#37474f'
       },
-      
+      textColorInherit: {
+        color: 'revert'
+      }
     },      
   }
 });

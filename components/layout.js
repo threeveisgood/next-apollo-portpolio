@@ -83,6 +83,7 @@ const useStyles = makeStyles((theme) => ({
     height: "55px",
     background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
     boxShadow: "none",
+    marginBottom: "0",
   },
   content: {
     flexGrow: 1,
@@ -109,44 +110,52 @@ export default function Header(props) {
   const classes = useStyles();
   const router = useRouter();
 
-  const [value, setValue] = React.useState(0);
-
-  const tabs = [{
-    label: 'Post List',
-    link: '/post'
-  }, {
-    label: 'GraphQL',
-    link: '/post/5ef874da2ba15915f42606a7'
-  },
-  {
-    label: 'Post',
-    link: '/post'
-  },
-  {
-    label: 'Shift',
-    link: '/post/5ef874da2ba15915f42606a7'
-  }];
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const tabs = [
+    {
+      label: "Post List",
+      link: "/post",
+    },
+    {
+      label: "React",
+      link: "/post/5ef874da2ba15915f42606a7",
+    },
+    {
+      label: "Next.js",
+      link: "/post",
+    },
+    {
+      label: "Apollo",
+      link: "/post/5ef874da2ba15915f42606a7",
+    },
+    {
+      label: "Express",
+      link: "/post/5ef874da2ba15915f42606a7",
+    },
+    {
+      label: "MongoDB",
+      link: "/post/5ef874da2ba15915f42606a7",
+    },
+  ];
 
   const handleClick = (link, e) => {
-    e.preventDefault()
+    e.preventDefault();
     router.push(link);
   };
 
   return (
     <div className={classes.root}>
-      <CssBaseline />      
-      <AppBar position="fixed" className={classes.appBar}>        
-        <Container maxWidth="md">
+      <CssBaseline />
+      <AppBar position="absolute" className={classes.appBar}> 
           <Toolbar>
+            <Grid justify='center' container>
+            <Grid item md={3}>
             <Typography className={classes.title} variant="h6" noWrap>
               <Link href="/">
                 <StyledA className={classes.titleText}>Threeveisgood</StyledA>
               </Link>
             </Typography>
+            </Grid>
+            <Grid item>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -161,36 +170,33 @@ export default function Header(props) {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
+            </Grid>
+            </Grid>
             <div className={classes.grow} />
-          </Toolbar>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              indicatorColor="primary"
-              textColor="primary"
-              variant="scrollable"
-              scrollButtons="auto"
-              aria-label="scrollable auto tabs"
-              className={classes.tabs}          
-                     
-            >
-              {/*<Tab label="Post List" {...a11yProps(0)} onClick={handleClick} />
-              <Tab label="Item Two" {...a11yProps(1)} />
-              <Tab label="Item Three" {...a11yProps(2)} />
-              <Tab label="Item Four" {...a11yProps(3)} />
-              <Tab label="Item Five" {...a11yProps(4)} />
-              <Tab label="Item Six" {...a11yProps(5)} />
-              <Tab label="Item Seven" {...a11yProps(6)} /> */}
+   
+          </Toolbar>        
+        <Grid justify="center" container>
+          <Tabs
+            value={false}
+            textColor="primary"
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="scrollable auto tabs"
+            className={classes.tabs}
+          >
+            <Grid item>
               {tabs.map((tab, index) => (
-                <Tab                  
+                <Tab
+                  value={index}
                   label={tab.label}
                   {...a11yProps(index)}
                   onClick={(e) => handleClick(tab.link, e)}
                 />
               ))}
-            </Tabs>
-        </Container>        
-        <Divider />        
+            </Grid>
+          </Tabs>
+        </Grid>
+        <Divider />
       </AppBar>
       <main className={classes.content}>
         <Toolbar />
