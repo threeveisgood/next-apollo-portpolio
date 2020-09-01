@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 const GET_POST = gql`
   query Post($id: ID!) {
-    post(id: $id) {
+    post(id: $id) {            
       id
       name
       description

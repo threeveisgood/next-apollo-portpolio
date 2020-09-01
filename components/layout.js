@@ -162,7 +162,7 @@ export default function Header(props) {
               </div>
               <InputBase
                 placeholder="
-                Under construction"
+                Under Construction"
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
@@ -172,8 +172,7 @@ export default function Header(props) {
             </div>
             </Grid>
             </Grid>
-            <div className={classes.grow} />
-   
+            <div className={classes.grow} />  
           </Toolbar>        
         <Grid justify="center" container>
           <Tabs
