@@ -39,37 +39,20 @@ export default () => {
   return (
     <Layout>
       <Container maxWidth="md">
-        <div>
-          <h1>writePost</h1>
-          <Grid container justify="flex-start" spacing={8}>
-            {data.posts.map((post, i) => (
-              <Grid item xs={12} md={4}>
-                <div key={i}>
-                  <div>{post.name}</div>
-                  <div>{post.description}</div>
-                  <div>{post.id}</div>
-                  <div>{post.imgUrl}</div>
-                </div>
-              </Grid>
-            ))}
-          </Grid>
-          <AddPost />
-        </div>
-        <div>
-          <h1>writePost</h1>
+        <div>          
           <Grid container justify="flex-start" spacing={8}>
             {data.posts.map((post, i) => (
                 <>           
-                  <Grid item sm={3}>
+                  <Grid item xs={12} md={3}>
                     <Typography variant="subtitle2" gutterBottom>
                       {post.name}
                     </Typography>
                   </Grid>
-                  <Grid item sm={3}>
+                  <Grid item xs={12} md={3}>
                     {post.description}
                   </Grid>
-                  <Grid item sm={3}>{post.id}</Grid>
-                  <Grid item sm={3}>{post.imgUrl}</Grid>                
+                  <Grid item xs={12} md={3}>{post.id}</Grid>
+                  <Grid item xs={12} md={3}>{post.imgUrl}</Grid>                
                 </>
             ))}
           </Grid>

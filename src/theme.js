@@ -35,7 +35,8 @@ const theme = createMuiTheme({
         textTransform: 'none'
       },
       wrapper: {
-        paddingBottom: '15px',        
+        paddingBottom: '8px',     
+        color: 'ghostwhite'   
       },
       textColorPrimary: {
         color: '#37474f'

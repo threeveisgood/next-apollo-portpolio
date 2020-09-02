@@ -93,13 +93,14 @@ const useStyles = makeStyles((theme) => ({
   titleText: {
     color: "beige",
   },
-  tabs: {
-    minHeight: "37px",
-    maxHeight: "37px",
+  tabs: {        
+    minHeight: "40px",
+    maxHeight: "40px",
   },
-  wrapper: {
-    paddingBottom: "10px",
-  },
+  tabsContainer: {
+    marginTop: "-10px",
+    background: "linear-gradient(45deg, #161716 5%, #120f0f 90%)"    
+  }
 }));
 
 export const StyledA = styled.a`
@@ -173,8 +174,8 @@ export default function Header(props) {
             </Grid>
             </Grid>
             <div className={classes.grow} />  
-          </Toolbar>        
-        <Grid justify="center" container>
+          </Toolbar>                  
+        <Grid justify="center" container className={classes.tabsContainer}>
           <Tabs
             value={false}
             textColor="primary"
