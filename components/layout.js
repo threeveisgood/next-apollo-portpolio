@@ -118,7 +118,7 @@ export default function Header(props) {
     },
     {
       label: "React",
-      link: "/post/5ef874da2ba15915f42606a7",
+      link: "/post/5f5709ecfb2de81e7c7ea91e",
     },
     {
       label: "Next.js",
@@ -126,15 +126,15 @@ export default function Header(props) {
     },
     {
       label: "Apollo",
-      link: "/post/5ef874da2ba15915f42606a7",
+      link: "/post/5f5709ecfb2de81e7c7ea91e",
     },
     {
       label: "Express",
-      link: "/post/5ef874da2ba15915f42606a7",
+      link: "/post/5f5709ecfb2de81e7c7ea91e",
     },
     {
       label: "MongoDB",
-      link: "/post/5ef874da2ba15915f42606a7",
+      link: "/post/5f5709ecfb2de81e7c7ea91e",
     },
   ];
 
@@ -152,7 +152,7 @@ export default function Header(props) {
             <Grid item md={3}>
             <Typography className={classes.title} variant="h6" noWrap>
               <Link href="/">
-                <StyledA className={classes.titleText}>Threeveisgood</StyledA>
+                <StyledA className={classes.titleText}>OmenBase</StyledA>
               </Link>
             </Typography>
             </Grid>

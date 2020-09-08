@@ -14,6 +14,8 @@ const GET_POST = gql`
       name
       description
       imgUrl
+      category
+      date
     }
   }
 `;
@@ -47,6 +49,9 @@ const Post = () => {
         <Grid item xs={12}>
           <Typography variant="h4" gutterBottom>
             {data.post.name}
+          </Typography>
+          <Typography variant="subtitle2" gutterBottom>
+            {data.post.date}
           </Typography>
         </Grid>
         <ImageGrid item xs={12}>

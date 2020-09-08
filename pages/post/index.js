@@ -24,6 +24,8 @@ const GET_POSTS = gql`
       name
       description
       imgUrl
+      category
+      date
     }
   }
 `;
@@ -41,18 +43,19 @@ export default () => {
       <Container maxWidth="md">
         <div>          
           <Grid container justify="flex-start" spacing={8}>
-            {data.posts.map((post, i) => (
+            {data.posts.map((post) => (
                 <>           
-                  <Grid item xs={12} md={3}>
-                    <Typography variant="subtitle2" gutterBottom>
+                  <Grid item xs={12} md={6} id={post.id}>
+                  <Typography variant="subtitle2" gutterBottom>
                       {post.name}
+                    </Typography>
+                    <Typography variant="subtitle2" gutterBottom>
+                      {post.date}
                     </Typography>
                   </Grid>
                   <Grid item xs={12} md={3}>
                     {post.description}
                   </Grid>
-                  <Grid item xs={12} md={3}>{post.id}</Grid>
-                  <Grid item xs={12} md={3}>{post.imgUrl}</Grid>                
                 </>
             ))}
           </Grid>

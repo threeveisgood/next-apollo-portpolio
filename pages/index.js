@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Puro</title>
+        <title>OmenBase</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
