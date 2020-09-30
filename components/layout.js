@@ -118,7 +118,7 @@ export default function Header(props) {
     },
     {
       label: "React",
-      link: "/post/5f5709ecfb2de81e7c7ea91e",
+      link: "/post/5f686df2a460e43e08e73900",
     },
     {
       label: "Next.js",
@@ -126,15 +126,15 @@ export default function Header(props) {
     },
     {
       label: "Apollo",
-      link: "/post/5f5709ecfb2de81e7c7ea91e",
+      link: "/post/5f686df2a460e43e08e73900",
     },
     {
       label: "Express",
-      link: "/post/5f5709ecfb2de81e7c7ea91e",
+      link: "/post/5f686df2a460e43e08e73900",
     },
     {
       label: "MongoDB",
-      link: "/post/5f5709ecfb2de81e7c7ea91e",
+      link: "/post/5f686df2a460e43e08e73900",
     },
   ];
 

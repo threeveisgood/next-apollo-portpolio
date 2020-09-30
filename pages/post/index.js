@@ -1,65 +1,58 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import {
   Container,
   Grid,
-  Fab,
-  Button,
-  TextField,
   Typography,
 } from "@material-ui/core";
-import { useMutation, useLazyQuery, useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import { Link } from "next/link";
-import { Formik } from "formik";
-import * as Yup from "yup";
+import Reactmarkdown from 'react-markdown'
 
 import Layout from "../../components/layout";
-import AddPost from "../../components/addPost";
 
-const GET_POSTS = gql`
-  query Posts {
-    posts {
+const GET_ARTICLES = gql`
+  query Articles {
+    articles {
       id
-      name
-      description
-      imgUrl
-      category
-      date
+      title
+      content
+      image {
+        url
+      }
+      published_at
+      categories {
+        name
+      }
     }
   }
 `;
 
 export default () => {
-  const { loading, error, data } = useQuery(GET_POSTS);
-  const [open, setOpen] = useState(false);
+  // const router = useRouter();
+  // const { pageNum } = router.query;
+  const { loading, error, data } = useQuery(GET_ARTICLES);  
 
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
-  //const { users } = data
 
   return (
     <Layout>
       <Container maxWidth="md">
         <div>          
           <Grid container justify="flex-start" spacing={8}>
-            {data.posts.map((post) => (
+            {data.articles.map((article) => (
                 <>           
-                  <Grid item xs={12} md={6} id={post.id}>
+                  <Grid item xs={12} md={12} id={article.id}>
                   <Typography variant="subtitle2" gutterBottom>
-                      {post.name}
+                      {article.title}
                     </Typography>
                     <Typography variant="subtitle2" gutterBottom>
-                      {post.date}
+                      {article.published_at}
                     </Typography>
-                  </Grid>
-                  <Grid item xs={12} md={3}>
-                    {post.description}
                   </Grid>
                 </>
             ))}
-          </Grid>
-          <AddPost />
+          </Grid>          
         </div>
       </Container>
     </Layout>

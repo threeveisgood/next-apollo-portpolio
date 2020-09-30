@@ -5,7 +5,7 @@ import gql from "graphql-tag";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { makeStyles } from "@material-ui/core/styles";
-import Editor from './write/editor'
+
 import {
   Fab,
   Button,

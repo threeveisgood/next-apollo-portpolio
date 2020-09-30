@@ -15,6 +15,8 @@ import theme from "../src/theme";
 
 const cache = new InMemoryCache();
 
+const GRAPHQL_URL = process.env.API_URL || "http://localhost:1337"
+
 const client = new ApolloClient({
   link: ApolloLink.from([
     onError(({ graphQLErrors, networkError }) => {
@@ -27,7 +29,7 @@ const client = new ApolloClient({
       if (networkError) console.log(`[Network error]: ${networkError}`);
     }),
     new HttpLink({
-      uri: "http://localhost:4000/graphql",
+      uri: GRAPHQL_URL + "/graphql",
       fetch: fetch
     }),
   ]),

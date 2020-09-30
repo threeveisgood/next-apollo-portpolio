@@ -6,23 +6,24 @@ import { useQuery } from "@apollo/react-hooks";
 import Layout from "../../components/layout";
 import { Container } from "@material-ui/core";
 import styled from "styled-components";
+import Reactmarkdown from 'react-markdown'
 
-const GET_POST = gql`
-  query Post($id: ID!) {
-    post(id: $id) {            
+const GET_ARTICLE = gql`
+  query ARTICLE($id: ID!) {
+    article(id: $id) {            
       id
-      name
-      description
-      imgUrl
-      category
-      date
+      title
+      content
+      image {
+        url
+      }
+      published_at
+      categories {
+        name
+      }
     }
   }
 `;
-
-const ContainerDiv = styled.div({
-  flexGrow: '1'
-})
 
 const Image = styled.img({
   maxWidth: "100%",  
@@ -35,7 +36,7 @@ const ImageGrid = styled(Grid)({
 const Post = () => {  
   const router = useRouter();
   const { id } = router.query;
-  const { loading, error, data } = useQuery(GET_POST, {
+  const { loading, error, data } = useQuery(GET_ARTICLE, {
     variables: { id },
   });
 
@@ -48,23 +49,17 @@ const Post = () => {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h4" gutterBottom>
-            {data.post.name}
+            {data.article.title}
           </Typography>
           <Typography variant="subtitle2" gutterBottom>
-            {data.post.date}
+            {data.article.published_at}
           </Typography>
         </Grid>
         <ImageGrid item xs={12}>
           <Image src="/images/deer.jpg" alt="Deer" />
         </ImageGrid>
         <Grid item xs={12}>
-          <Typography variant="body1" gutterBottom>
-            {data.post.description}
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-            ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-            ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-            ipsumLorem ipsum
-          </Typography>
+         <Reactmarkdown source={data.article.content} />
         </Grid>
       </Grid>
       </Container>
