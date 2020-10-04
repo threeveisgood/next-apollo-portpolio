@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     display: "flex",
-    backgroundColor: "ghostwhite",
+    backgroundColor: "#F0EFF3",
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,

@@ -21,7 +21,7 @@ const theme = createMuiTheme({
     MuiCssBaseline: {
       '@global': {
         html: {
-          backgroundColor: 'ghostwhite'
+          backgroundColor: '#F0EFF3'
         },
       },
     },
@@ -36,7 +36,7 @@ const theme = createMuiTheme({
       },
       wrapper: {
         paddingBottom: '8px',     
-        color: 'ghostwhite'   
+        color: '#F0EFF3'   
       },
       textColorPrimary: {
         color: '#37474f'
