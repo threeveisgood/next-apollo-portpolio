@@ -60,7 +60,7 @@ export default () => {
   console.log(data.articles)
   console.log(dataA.articlesConnection.aggregate.count);
 
-  const LastPage = Math.ceil(dataA.articlesConnection.aggregate.count / 3);
+  const LastPage = Math.ceil(dataA.articlesConnection.aggregate.count / postCount);
   
   return (
     <Layout>
