@@ -1,13 +1,13 @@
 import React from "react";
 import { Container, Grid, Typography } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
-import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
+import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 //import Reactmarkdown from 'react-markdown'
 
 import Layout from "../../components/layout";
+import { initializeApollo } from "../../apollo/client";
 
 const PostGrid = styled(Grid)({
   //  padding: '8px !important'
@@ -48,12 +48,12 @@ export default () => {
   const page = parseInt(router.query.page || "1", 10);
   const start = (page - 1) * postCount;
 
+  const { data: dataA } = useQuery(GET_AGGREGATE);
+
   const { loading, error, data } = useQuery(GET_ARTICLES, {
     variables: { limit: postCount, start: start },
   });
 
-  const { loading: loadingA, error: errorA, data: dataA } = useQuery(GET_AGGREGATE);
-  
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
@@ -76,7 +76,7 @@ export default () => {
             {data.articles.map((article) => (
               <React.Fragment>
                 <PostGrid item xs={9} md={9}>
-                  <Typography variant="subtitle2" gutterBottom>
+                  <Typography id={article.id} variant="subtitle2" gutterBottom>
                     {article.title}
                   </Typography>
                 </PostGrid>
@@ -104,56 +104,17 @@ export default () => {
   );
 };
 
-// export default () => {
-//    const router = useRouter();
-//   // const { pageNum } = router.query;
+export async function getStaticProps() {
+  const apolloClient = initializeApollo()
 
-//   console.log(router.query.page)
+  await apolloClient.query({
+    query: GET_ARTICLES,  
+    query: GET_AGGREGATE
+  })
 
-//   return (
-//     <Layout>
-//       <Container maxWidth="md">
-//         <div>
-//           <Grid container justify="flex-start" spacing={8}>
-//             {data.articles.map((article) => (
-//                 <>
-//                   <Grid item xs={12} md={12} id={article.id}>
-//                   <Typography variant="subtitle2" gutterBottom>
-//                       {article.title}
-//                     </Typography>
-//                     <Typography variant="subtitle2" gutterBottom>
-//                       {article.published_at}
-//                     </Typography>
-//                   </Grid>
-//                 </>
-//             ))}
-//           </Grid>
-//         </div>
-//       </Container>
-//     </Layout>
-//   );
-// };
-
-// export const getStaticPaths = async () => {
-
-//   const { loading, error, dataR } = useQuery(GET_ARTICLES);
-
-//   if (loading) return "Loading...";
-//   if (error) return `Error! ${error.message}`;
-
-//   const paths = dataR.map(post =>
-//     {
-//      params: { id: post.id }
-//     }
-//   )
-
-//   return {
-//     paths,
-//     fallback: true
-//   }
-// }
-
-// export const getStaticProps = async () => {
-//   const { data } = useQuery(GET_ARTICLES);
-//   return { props: { data } };
-// };
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    }
+  }
+}

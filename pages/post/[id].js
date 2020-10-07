@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
-import gql from "graphql-tag";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import { useQuery } from "@apollo/react-hooks";
+import { gql, useQuery } from "@apollo/client";
 import Layout from "../../components/layout";
 import { Container } from "@material-ui/core";
 import styled from "styled-components";
