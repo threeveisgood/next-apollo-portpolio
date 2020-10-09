@@ -8,7 +8,7 @@ const theme = createMuiTheme({
       main: lightBlue[800],
     },
     secondary: {
-      main: '#19857b',
+      main: '#3299d1',
     },
     error: {
       main: red.A400,

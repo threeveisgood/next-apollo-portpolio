@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Grid, Typography } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
+import PaginationItem from "@material-ui/lab/PaginationItem";
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-//import Reactmarkdown from 'react-markdown'
+import Link from "next/link";
 
 import Layout from "../../components/layout";
 import { initializeApollo } from "../../apollo/client";
@@ -36,13 +37,19 @@ const GET_AGGREGATE = gql`
       aggregate {
         count
         totalCount
-     }
+      }
+    }
   }
-}
 `;
 
 export default () => {
   const router = useRouter();
+  const [pagination, setPagination] = useState(1);
+
+  const handleChange = (event, value) => {
+    setPagination(value);
+    router.push("/post?page=" + value);
+  };
 
   const postCount = 3;
   const page = parseInt(router.query.page || "1", 10);
@@ -57,11 +64,14 @@ export default () => {
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
-  console.log(data.articles)
-  console.log(dataA.articlesConnection.aggregate.count);
+  // console.log(data.articles);
+  // console.log(dataA.articlesConnection.aggregate.count);
+  // console.log(router.query.page)
 
-  const LastPage = Math.ceil(dataA.articlesConnection.aggregate.count / postCount);
-  
+  const LastPage = Math.ceil(
+    dataA.articlesConnection.aggregate.count / postCount
+  );
+
   return (
     <Layout>
       <Container maxWidth="sm">
@@ -77,7 +87,11 @@ export default () => {
               <React.Fragment>
                 <PostGrid item xs={9} md={9}>
                   <Typography id={article.id} variant="subtitle2" gutterBottom>
-                    {article.title}
+                    <Link href={`/post/${article.id}`}>
+                      <a style={{ textDecoration: "none", color: "inherit" }}>
+                        {article.title}
+                      </a>
+                    </Link>
                   </Typography>
                 </PostGrid>
                 <PostGrid item xs={3} md={3}>
@@ -95,7 +109,16 @@ export default () => {
             style={{ marginTop: "5vh" }}
           >
             <Grid item>
-              <Pagination count={LastPage} color="primary" />
+              <Pagination
+                count={LastPage}
+                color="secondary"
+                size="small"
+                page={pagination}
+                onChange={handleChange}
+                shape="rounded"
+                showFirstButton
+                showLastButton
+              />
             </Grid>
           </Grid>
         </div>
@@ -105,16 +128,16 @@ export default () => {
 };
 
 export async function getStaticProps() {
-  const apolloClient = initializeApollo()
+  const apolloClient = initializeApollo();
 
-  await apolloClient.query({
-    query: GET_ARTICLES,  
-    query: GET_AGGREGATE
-  })
+  // await apolloClient.query({
+  //   query: GET_ARTICLES,
+  //   query: GET_AGGREGATE
+  // })
 
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
-    }
-  }
+    },
+  };
 }
