@@ -175,7 +175,7 @@ export default function Header(props) {
         <Grid justify="center" container className={classes.tabsContainer}>
           <Tabs
             value={false}
-            textColor="primary"
+            textcolor="primary" //can't resolve it, replace to textColor
             variant="scrollable"
             scrollButtons="auto"
             aria-label="scrollable auto tabs"

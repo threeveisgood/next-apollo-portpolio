@@ -44,7 +44,8 @@ const GET_AGGREGATE = gql`
 
 export default () => {
   const router = useRouter();
-  const [pagination, setPagination] = useState(1);
+  
+  const [pagination, setPagination] = useState(router.query.page);
 
   const handleChange = (event, value) => {
     setPagination(value);
@@ -72,6 +73,7 @@ export default () => {
     dataA.articlesConnection.aggregate.count / postCount
   );
 
+  console.log(router.query.page)
   return (
     <Layout>
       <Container maxWidth="sm">
@@ -118,6 +120,10 @@ export default () => {
                 shape="rounded"
                 showFirstButton
                 showLastButton
+                renderItem={(item) => 
+                 <PaginationItem {...item}
+                  />}
+                defaultPage={page}
               />
             </Grid>
           </Grid>
