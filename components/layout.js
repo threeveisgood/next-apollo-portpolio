@@ -13,6 +13,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Divider from "@material-ui/core/Divider";
 import { useRouter } from "next/router";
+import useMeidaQuery from '@material-ui/core/useMediaQuery'
 
 function a11yProps(index) {
   return {
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   title: {
-    display: "none",
+    //display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block",
     },
@@ -48,6 +49,10 @@ const useStyles = makeStyles((theme) => ({
     },
     marginBottom: "10px",
     height: "30px",
+    //erase search bar !!
+    ['@media (max-width:600px)']: {
+      display: 'none'
+    }, 
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
