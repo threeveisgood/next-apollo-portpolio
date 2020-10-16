@@ -24,13 +24,12 @@ const GET_ARTICLE = gql`
   }
 `;
 
-const Image = styled.img({
-  maxWidth: "100%",  
-});
-
-const ImageGrid = styled(Grid)({
-  textAlign: "center"
-});
+const StyledReactmarkdown = styled(Reactmarkdown)`
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+`
 
 const Post = () => {  
   const router = useRouter();
@@ -50,15 +49,12 @@ const Post = () => {
           <Typography variant="h4" gutterBottom>
             {data.article.title}
           </Typography>
-          <Typography variant="subtitle2" gutterBottom>
+          <Typography variant="overline" gutterBottom>
             {data.article.published_at}
           </Typography>
         </Grid>
-        <ImageGrid item xs={12}>
-          <Image src="/images/deer.jpg" alt="Deer" />
-        </ImageGrid>
         <Grid item xs={12}>
-         <Reactmarkdown source={data.article.content} />
+         <StyledReactmarkdown source={data.article.content} />
         </Grid>
       </Grid>
       </Container>

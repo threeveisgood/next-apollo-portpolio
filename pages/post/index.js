@@ -45,7 +45,7 @@ const GET_AGGREGATE = gql`
 export default () => {
   const router = useRouter();
 
-  const postCount = 3;
+  const postCount = 8;
   const page = parseInt(router.query.page || "1", 10);
   const start = (page - 1) * postCount;
 
