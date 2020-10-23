@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     display: "flex",
-    backgroundColor: "#F0EFF3",
+    //backgroundColor: "#F0EFF3",
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -89,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    marginTop: theme.spacing(7),
+    marginTop: "45px"//theme.spacing(7),
   },
   titleText: {
     color: "beige",
@@ -114,27 +114,27 @@ export default function Header(props) {
 
   const tabs = [
     {
-      label: "Post List",
+      label: "PC",
       link: "/post",
     },
     {
-      label: "React",
+      label: "Switch",
       link: "/post/5f686df2a460e43e08e73900",
     },
     {
-      label: "Next.js",
+      label: "PS5",
       link: "/post",
     },
     {
-      label: "Apollo",
+      label: "Moblie",
       link: "/post/5f686df2a460e43e08e73900",
     },
     {
-      label: "Express",
+      label: "Xbox",
       link: "/post/5f686df2a460e43e08e73900",
     },
     {
-      label: "MongoDB",
+      label: "Anime",
       link: "/post/5f686df2a460e43e08e73900",
     },
   ];

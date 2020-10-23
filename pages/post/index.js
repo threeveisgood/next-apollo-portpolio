@@ -6,9 +6,11 @@ import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import Link from "next/link";
+import moment from "moment";
 
 import Layout from "../../components/layout";
 import { initializeApollo } from "../../apollo/client";
+import Postlist from "../../components/post/postList";
 
 const PostGrid = styled(Grid)({
   //  padding: '8px !important'
@@ -73,60 +75,53 @@ export default () => {
     dataA.articlesConnection.aggregate.count / postCount
   );
 
-  console.log(router.query.page);
+  //console.log(router.query.page);
+
+  //Markdown Image Regex 
+  const regex = /!\[[^\]]*\]\((.*?)\s*("(?:.*[^"])")?\s*\)/g
+
   return (
     <Layout>
-      <Container maxWidth="sm">
-        <div>
-          <Grid
-            container
-            justify="flex-start"
-            spacing={1}
-            alignItems="center"
-            justify="center"
-          >
-            {data.articles.map((article) => (
-              <React.Fragment>
-                <PostGrid item xs={9} md={9}>
-                  <Typography id={article.id} variant="subtitle2" gutterBottom>
-                    <Link href={`/post/${article.id}`}>
-                      <a style={{ textDecoration: "none", color: "inherit" }}>
-                        {article.title}
-                      </a>
-                    </Link>
-                  </Typography>
-                </PostGrid>
-                <PostGrid item xs={3} md={3}>
-                  {article.published_at.substring(5, 10).replace("-", "/")}
-                </PostGrid>
-              </React.Fragment>
-            ))}
+      {data.articles.map((article) => {
+        //console.log(regex.exec(article.content)) 
+        console.log(article.content.replace(regex, '')) 
+        //console.log((article.content).substring(0,25)) 
+      })}
+      {data.articles.map((article) => (
+        <React.Fragment>
+          <Postlist
+            id={article.id}
+            title={article.title}
+            published_at={article.published_at}
+            previewContent={(article.content.replace(regex, '').substring(0,100))}            
+          />
+        </React.Fragment>
+      ))}
+      <div>
+        <Grid
+          container
+          justify="flex-start"
+          spacing={1}
+          alignItems="center"
+          justify="center"
+          style={{ marginTop: "5vh" }}
+        >
+          <Grid item>
+            <Pagination
+              count={LastPage}
+              color="secondary"
+              size="small"
+              page={pagination}
+              onChange={handleChange}
+              shape="rounded"
+              showFirstButton
+              showLastButton
+              renderItem={(item) => <PaginationItem {...item} />}
+              defaultPage={page}
+            />
           </Grid>
-          <Grid
-            container
-            justify="flex-start"
-            spacing={1}
-            alignItems="center"
-            justify="center"
-            style={{ marginTop: "5vh" }}
-          >
-            <Grid item>
-              <Pagination
-                count={LastPage}
-                color="secondary"
-                size="small"
-                page={pagination}
-                onChange={handleChange}
-                shape="rounded"
-                showFirstButton
-                showLastButton
-                renderItem={(item) => <PaginationItem {...item} />}
-                defaultPage={page}
-              />
-            </Grid>
-          </Grid>
-        </div>
-      </Container>
+        </Grid>
+      </div>
     </Layout>
   );
 };
