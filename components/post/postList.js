@@ -29,7 +29,7 @@ export default ({ published_at, title, previewContent }) => {
           justify="center"
           spacing={1}          
         >
-          <Grid item md={4}>
+          <Grid item md={4} xs={12}>
             <Card className={classes.root}>
               <CardContent>
                 <Typography

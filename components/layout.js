@@ -49,9 +49,10 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "10px",
     height: "30px",
     //erase search bar !!
-    ['@media (max-width:600px)']: {
-      display: 'none'
-    }, 
+    ["@media (max-width:600px)"]: {
+      display: "none",
+    },
+    marginTop: "17px"
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -89,19 +90,20 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    marginTop: "45px"//theme.spacing(7),
+    marginTop: "45px", //theme.spacing(7),
   },
   titleText: {
     color: "beige",
+    textDecoration: "none"
   },
-  tabs: {        
+  tabs: {
     minHeight: "40px",
     maxHeight: "40px",
   },
   tabsContainer: {
     marginTop: "-10px",
-    background: "linear-gradient(45deg, #161716 5%, #120f0f 90%)"    
-  }
+    background: "linear-gradient(45deg, #161716 5%, #120f0f 90%)",
+  },
 }));
 
 export const StyledA = styled.a`
@@ -147,35 +149,35 @@ export default function Header(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="absolute" className={classes.appBar}> 
-          <Toolbar>
-            <Grid justify='center' container>
+      <AppBar position="absolute" className={classes.appBar}>
+        <Toolbar>
+          <Grid justify="center" container>
             <Grid item md={3}>
-            <Typography className={classes.title} variant="h6" noWrap>
               <Link href="/">
-                <StyledA className={classes.titleText}>OmenBase</StyledA>
+                <a className={classes.titleText} >                  
+                    <h2 style={{ marginBottom: "30px" }}>OmenBase</h2>
+                </a>
               </Link>
-            </Typography>
             </Grid>
             <Grid item>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <InputBase
+                  placeholder="
                 Under Construction"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ "aria-label": "search" }}
-              />
-            </div>
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </div>
             </Grid>
-            </Grid>
-            <div className={classes.grow} />  
-          </Toolbar>                  
+          </Grid>
+          <div className={classes.grow} />
+        </Toolbar>
         <Grid justify="center" container className={classes.tabsContainer}>
           <Tabs
             value={false}
