@@ -13,9 +13,6 @@ const GET_ARTICLE = gql`
       id
       title
       content
-      image {
-        url
-      }
       published_at
       categories {
         name

@@ -136,11 +136,11 @@ export default function Header(props) {
       link: "/post/5f686df2a460e43e08e73900",
     },
     {
-      label: "Anime",
+      label: "Wiki",
       link: "/post/5f686df2a460e43e08e73900",
     },
   ];
-
+  
   const handleClick = (link, e) => {
     e.preventDefault();
     router.push(link);
@@ -189,12 +189,16 @@ export default function Header(props) {
           >
             <Grid item>
               {tabs.map((tab, index) => (
+                <Link href={`${tab.link}`}>
+                <a style={{ textDecoration: "none" }}>
                 <Tab
                   value={index}
                   label={tab.label}
                   {...a11yProps(index)}
-                  onClick={(e) => handleClick(tab.link, e)}
+                  onClick={(e) => handleClick(tab.link, e)}                  
                 />
+                </a>
+                </Link>
               ))}
             </Grid>
           </Tabs>

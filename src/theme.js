@@ -27,7 +27,7 @@ const theme = createMuiTheme({
     },
     MuiTabScrollButton: {
       root: {
-        color: 'black'
+        color: '#F0EFF3'
       }
     },
     MuiTab: {
