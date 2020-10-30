@@ -116,28 +116,28 @@ export default function Header(props) {
 
   const tabs = [
     {
-      label: "PC",
+      label: "전체 목록",
       link: "/post",
+    },
+    {
+      label: "PC",
+      link: "/pc",
     },
     {
       label: "Switch",
-      link: "/post/5f686df2a460e43e08e73900",
+      link: "/nintendo",
     },
     {
       label: "PS5",
-      link: "/post",
+      link: "/playstation",
     },
     {
       label: "Moblie",
-      link: "/post/5f686df2a460e43e08e73900",
+      link: "/mobile",
     },
     {
       label: "Xbox",
-      link: "/post/5f686df2a460e43e08e73900",
-    },
-    {
-      label: "Wiki",
-      link: "/post/5f686df2a460e43e08e73900",
+      link: "/xbox",
     },
   ];
   

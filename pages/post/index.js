@@ -22,7 +22,7 @@ const GET_ARTICLES = gql`
       id
       title
       content
-      published_at
+      createdAt
       categories {
         name
       }
@@ -89,7 +89,7 @@ export default () => {
           <Postlist
             id={article.id}
             title={article.title}
-            published_at={article.published_at}
+            createdAt={article.createdAt}
             previewContent={(article.content.replace(regex, '').substring(0,100))}            
           />
         </React.Fragment>

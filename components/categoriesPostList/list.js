@@ -17,7 +17,7 @@ const GET_ARTICLES = gql`
       id
       title
       content
-      published_at
+      createdAt
       categories {
         name
       }
@@ -80,8 +80,8 @@ export default ({ gameCategory }) => {
           <PostList
             id={article.id}
             title={article.title}
-            published_at={article.published_at}
-            previewContent={(article.content.replace(regex, '').substring(0,100))}            
+            createdAt={article.createdAt}
+            previewContent={(article.content.replace(regex, '').substring(0,100))}             
           />
         </React.Fragment>
       ))}
