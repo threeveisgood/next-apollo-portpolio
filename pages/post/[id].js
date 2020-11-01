@@ -38,7 +38,8 @@ const AuthorName = styled.span({
 const RecommendButton = styled(Button)({
   background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
   color: "whitesmoke",
-  width: "15vh",
+  width: "6vh",
+  marginTop: "4vh"
 });
 
 const Post = () => {
@@ -75,7 +76,7 @@ const Post = () => {
         </Grid>
         <Grid container justify="center">
           <RecommendButton centered variant="contained">
-            추천 수 &nbsp;0
+            <ThumbUpIcon />&nbsp;&nbsp;0
           </RecommendButton>
         </Grid>
       </Container>

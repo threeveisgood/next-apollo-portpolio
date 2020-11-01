@@ -116,10 +116,6 @@ export default function Header(props) {
 
   const tabs = [
     {
-      label: "전체 목록",
-      link: "/post",
-    },
-    {
       label: "PC",
       link: "/pc",
     },
@@ -138,6 +134,10 @@ export default function Header(props) {
     {
       label: "Xbox",
       link: "/xbox",
+    },
+    {
+      label: "애니/만화",
+      link: "/post",
     },
   ];
   
