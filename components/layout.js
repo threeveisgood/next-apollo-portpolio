@@ -4,15 +4,13 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import styled from "styled-components";
-import SearchIcon from "@material-ui/icons/Search";
-import InputBase from "@material-ui/core/InputBase";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Divider from "@material-ui/core/Divider";
 import { useRouter } from "next/router";
+import { Search } from './searchbar/search'
 
 function a11yProps(index) {
   return {
@@ -31,50 +29,6 @@ const useStyles = makeStyles((theme) => ({
       display: "block",
     },
     marginBottom: "10px",
-  },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(25),
-      width: "auto",
-    },
-    marginBottom: "10px",
-    height: "30px",
-    //erase search bar !!
-    ["@media (max-width:600px)"]: {
-      display: "none",
-    },
-    marginTop: "17px"
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputRoot: {
-    color: "inherit",
-  },
-  inputInput: {
-    /* padding: theme.spacing(1, 1, 1, 0), */
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
   },
   root: {
     display: "flex",
@@ -116,6 +70,10 @@ export default function Header(props) {
 
   const tabs = [
     {
+      label: "전체 목록",
+      link: "/post",
+    },
+    {
       label: "PC",
       link: "/pc",
     },
@@ -134,10 +92,6 @@ export default function Header(props) {
     {
       label: "Xbox",
       link: "/xbox",
-    },
-    {
-      label: "애니/만화",
-      link: "/post",
     },
   ];
   
@@ -160,20 +114,7 @@ export default function Header(props) {
               </Link>
             </Grid>
             <Grid item>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase
-                  placeholder="
-                Under Construction"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </div>
+              <Search />
             </Grid>
           </Grid>
           <div className={classes.grow} />

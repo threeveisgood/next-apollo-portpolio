@@ -39,7 +39,7 @@ const RecommendButton = styled(Button)({
   background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
   color: "whitesmoke",
   width: "6vh",
-  marginTop: "4vh"
+  marginTop: "3vh"
 });
 
 const Post = () => {
