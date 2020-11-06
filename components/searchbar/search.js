@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
-import InputBase from "@material-ui/core/InputBase";
+import { InputBase } from 'formik-material-ui';
 import { useRouter } from "next/router";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const validationSchema = yup.object({
-  search: yup.string().required(),
+  search: yup.string().max(50).required()
 });
 
 export const Search = () => {
@@ -65,21 +65,28 @@ export const Search = () => {
     <div className={classes.search}>
       <div className={classes.searchIcon}>
         <SearchIcon />
-      </div>
-      <Formik initialValue={{ search: "" }} validationSchema={validationSchema}>
-        {() => (
-          <form autoComplete="off">
-            <InputBase
-              placeholder=""
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              name="search"
-              inputProps={{ "aria-label": "search" }}
+      </div>      
+      <Formik
+        initialValues={{ search: null }}
+        validationSchema={validationSchema}
+        onSubmit={async (values) => {
+          await new Promise((r) => setTimeout(r, 500));
+          alert(JSON.stringify(values, null, 2));
+        }}
+      >      
+      {({ }) => (
+          <Form autoComplete="off">
+            <Field 
+             component={InputBase}
+             classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            name="search"
+            inputProps={{ "aria-label": "search" }}
             />
-          </form>
-        )}
+          </Form>
+          )}
       </Formik>
     </div>
   );
