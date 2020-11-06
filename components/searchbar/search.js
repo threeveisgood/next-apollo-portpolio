@@ -70,8 +70,7 @@ export const Search = () => {
         initialValues={{ search: null }}
         validationSchema={validationSchema}
         onSubmit={async (values) => {
-          await new Promise((r) => setTimeout(r, 500));
-          alert(JSON.stringify(values, null, 2));
+          await router.push(`/search/${values.search}`)
         }}
       >      
       {({ }) => (
