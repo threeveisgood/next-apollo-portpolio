@@ -10,7 +10,6 @@ import Layout from "../layout";
 import { initializeApollo } from "../../apollo/client";
 import PostList from "../post/postList";
 
-
 const GET_ARTICLES = gql`
   query Articles($start: Int!, $limit: Int!, $where: JSON!) {
     articles(start: $start, limit: $limit, where: $where) {
@@ -42,21 +41,22 @@ export default ({ gameCategory }) => {
   const postCount = 8;
   const page = parseInt(router.query.page || "1", 10);
   const start = (page - 1) * postCount;
-  const category = { categories: { name: `${gameCategory}` }}
-  const categoryAggregate = { name: `${gameCategory}` }
+  const category = { categories: { name: `${gameCategory}` } };
+  const categoryAggregate = { name: `${gameCategory}` };
 
   const [pagination, setPagination] = useState(router.query.page);
 
   const handleChange = (event, value) => {
-    setPagination(value);
-    router.push(`/${gameCategory}?page=` + value);
+    setPagination(value);  
+    router.push({ pathname: `/${gameCategory}`, query: { page: `${value}` } });
   };
 
   const { data: dataA } = useQuery(GET_AGGREGATE, {
-      variables: { where: categoryAggregate }
+    variables: { where: categoryAggregate },
   });
 
-  const { loading, error, data } = useQuery(GET_ARTICLES, { //
+  const { loading, error, data } = useQuery(GET_ARTICLES, {
+    //
     variables: { limit: postCount, start: start, where: category },
   });
 
@@ -67,13 +67,13 @@ export default ({ gameCategory }) => {
     dataA.categoriesConnection.aggregate.count / postCount
   );
 
-  //Markdown Image Regex 
-  const regex = /!\[[^\]]*\]\((.*?)\s*("(?:.*[^"])")?\s*\)/g
+  //Markdown Image Regex
+  const regex = /!\[[^\]]*\]\((.*?)\s*("(?:.*[^"])")?\s*\)/g;
 
   return (
     <Layout>
       {data.articles.map((article) => {
-        console.log(article.content.replace(regex, '')) 
+        console.log(article.content.replace(regex, ""));
       })}
       {data.articles.map((article) => (
         <React.Fragment>
@@ -81,7 +81,9 @@ export default ({ gameCategory }) => {
             id={article.id}
             title={article.title}
             createdAt={article.createdAt}
-            previewContent={(article.content.replace(regex, '').substring(0,100))}             
+            previewContent={article.content
+              .replace(regex, "")
+              .substring(0, 100)}
           />
         </React.Fragment>
       ))}

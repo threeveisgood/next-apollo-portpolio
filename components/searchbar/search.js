@@ -69,8 +69,8 @@ export const Search = () => {
       <Formik
         initialValues={{ search: null }}
         validationSchema={validationSchema}
-        onSubmit={async (values) => {
-          await router.push(`/search/${values.search}`)
+        onSubmit={async (values) => {          
+          await router.push({ pathname: `/search` , query: { search_value: `${values.search}`}})
         }}
       >      
       {({ }) => (

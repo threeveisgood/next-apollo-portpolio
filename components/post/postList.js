@@ -7,7 +7,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { Grid } from "@material-ui/core";
 import moment from "moment";
-import Link from "next/link";
+import Link from "next/link"
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles({
   root: {
@@ -19,6 +20,7 @@ const useStyles = makeStyles({
 });
 
 export default ({ createdAt, title, previewContent, id }) => {
+  const router = useRouter()
   const classes = useStyles();
 
   return (

@@ -52,7 +52,8 @@ export default () => {
 
   const handleChange = (event, value) => {
     setPagination(value);
-    router.push("/post?page=" + value);
+    //router.push("/post?page=" + value);
+    router.push({ pathname: `/post`, query: { page: `${value}` } })
   };
 
   const { data: dataA } = useQuery(GET_AGGREGATE);

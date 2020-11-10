@@ -10,7 +10,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Divider from "@material-ui/core/Divider";
 import { useRouter } from "next/router";
-import { Search } from './searchbar/search'
+import { Search } from "./searchbar/search";
+import { SearchMobile } from "./searchbar/searchMobile";
 
 function a11yProps(index) {
   return {
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
   titleText: {
     color: "beige",
-    textDecoration: "none"
+    textDecoration: "none",
   },
   tabs: {
     minHeight: "40px",
@@ -57,6 +58,11 @@ const useStyles = makeStyles((theme) => ({
   tabsContainer: {
     marginTop: "-10px",
     background: "linear-gradient(45deg, #161716 5%, #120f0f 90%)",
+  },
+  desktop: {
+    ["@media (max-width:615px)"]: {
+      display: "none",
+    },
   },
 }));
 
@@ -94,7 +100,7 @@ export default function Header(props) {
       link: "/xbox",
     },
   ];
-  
+
   const handleClick = (link, e) => {
     e.preventDefault();
     router.push(link);
@@ -105,11 +111,11 @@ export default function Header(props) {
       <CssBaseline />
       <AppBar position="absolute" className={classes.appBar}>
         <Toolbar>
-          <Grid justify="center" container>
+          <Grid justify="center" container className={classes.desktop}>
             <Grid item md={3}>
               <Link href="/">
-                <a className={classes.titleText} >                  
-                    <h2 style={{ marginBottom: "30px" }}>OmenBase</h2>
+                <a className={classes.titleText}>
+                  <h2 style={{ marginBottom: "30px" }}>OmenBase</h2>
                 </a>
               </Link>
             </Grid>
@@ -117,6 +123,7 @@ export default function Header(props) {
               <Search />
             </Grid>
           </Grid>
+            <SearchMobile />
           <div className={classes.grow} />
         </Toolbar>
         <Grid justify="center" container className={classes.tabsContainer}>
@@ -131,14 +138,14 @@ export default function Header(props) {
             <Grid item>
               {tabs.map((tab, index) => (
                 <Link href={`${tab.link}`}>
-                <a style={{ textDecoration: "none" }}>
-                <Tab
-                  value={index}
-                  label={tab.label}
-                  {...a11yProps(index)}
-                  onClick={(e) => handleClick(tab.link, e)}                  
-                />
-                </a>
+                  <a style={{ textDecoration: "none" }}>
+                    <Tab
+                      value={index}
+                      label={tab.label}
+                      {...a11yProps(index)}
+                      onClick={(e) => handleClick(tab.link, e)}
+                    />
+                  </a>
                 </Link>
               ))}
             </Grid>
