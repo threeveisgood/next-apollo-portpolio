@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Container, Grid, Typography } from "@material-ui/core";
+import React, { useState } from "react";
+import { Grid } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import PaginationItem from "@material-ui/lab/PaginationItem";
 import { gql, useQuery } from "@apollo/client";
@@ -7,12 +7,11 @@ import { useRouter } from "next/router";
 
 import Layout from "../../components/layout";
 import { initializeApollo } from "../../apollo/client";
-import Postlist from "../../components/post/postList";
+import PostList from "../../components/post/postList";
 
-
-const GET_ARTICLES = gql`
-  query Articles($start: Int!, $limit: Int!) {
-    articles(start: $start, limit: $limit) {
+const GET_SEARCH_RESULT = gql`
+  query Articles($start: Int!, $limit: Int!, $where: JSON!) {
+    articles(start: $start, limit: $limit, where: $where) {
       id
       title
       content
@@ -24,12 +23,11 @@ const GET_ARTICLES = gql`
   }
 `;
 
-const GET_AGGREGATE = gql`
-  query ArticlesConnection {
-    articlesConnection {
+const GET_SEARCH_AGGREGATE = gql`
+  query ArticlesConnection($where: JSON!) {
+    articlesConnection(where: $where) {
       aggregate {
         count
-        totalCount
       }
     }
   }
@@ -38,22 +36,28 @@ const GET_AGGREGATE = gql`
 export default () => {
   const router = useRouter();
 
-  const postCount = 8;
+  const postCount = 6;
   const page = parseInt(router.query.page || "1", 10);
   const start = (page - 1) * postCount;
+  const { search_value } = router.query;
+  const searchValue = { title_contains: search_value };
 
-  const [pagination, setPagination] = useState(router.query.page);
+  const [pagination, setPagination] = useState(page);
 
   const handleChange = (event, value) => {
     setPagination(value);
-    //router.push("/post?page=" + value);
-    router.push({ pathname: `/post`, query: { page: `${value}` } })
+    router.push({
+      pathname: `/search`,
+      query: { search_value: `${search_value}`, page: `${value}` },
+    });
   };
 
-  const { data: dataA } = useQuery(GET_AGGREGATE);
+  const { data: dataA } = useQuery(GET_SEARCH_AGGREGATE, {
+    variables: { where: searchValue },
+  });
 
-  const { loading, error, data } = useQuery(GET_ARTICLES, {
-    variables: { limit: postCount, start: start },
+  const { loading, error, data } = useQuery(GET_SEARCH_RESULT, {
+    variables: { limit: postCount, start: start, where: searchValue },
   });
 
   if (loading) return "Loading...";
@@ -63,20 +67,23 @@ export default () => {
     dataA.articlesConnection.aggregate.count / postCount
   );
 
-  //console.log(router.query.page);
-
-  //Markdown Image Regex 
-  const regex = /!\[[^\]]*\]\((.*?)\s*("(?:.*[^"])")?\s*\)/g
+  console.log(LastPage);
+  const regex = /!\[[^\]]*\]\((.*?)\s*("(?:.*[^"])")?\s*\)/g;
 
   return (
     <Layout>
+      {data.articles.map((article) => {
+        console.log(article.content.replace(regex, ""));
+      })}
       {data.articles.map((article) => (
         <React.Fragment>
-          <Postlist
+          <PostList
             id={article.id}
             title={article.title}
             createdAt={article.createdAt}
-            previewContent={(article.content.replace(regex, '').substring(0,100))}            
+            previewContent={article.content
+              .replace(regex, "")
+              .substring(0, 100)}
           />
         </React.Fragment>
       ))}
@@ -109,13 +116,18 @@ export default () => {
   );
 };
 
-export async function getStaticProps() {
-  const apolloClient = initializeApollo();
+// export async function getStaticProps() {
+//   const apolloClient = initializeApollo();
 
-  // await apolloClient.query({
-  //   query: GET_ARTICLES,
-  //   query: GET_AGGREGATE
-  // })
+//   return {
+//     props: {
+//       initialApolloState: apolloClient.cache.extract(),
+//     },
+//   };
+// }
+
+export async function getServerSideProps() {
+  const apolloClient = initializeApollo();
 
   return {
     props: {
