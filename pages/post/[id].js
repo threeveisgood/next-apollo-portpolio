@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Head from "next/head";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { gql, useQuery } from "@apollo/client";
@@ -7,8 +8,8 @@ import { Button, Container } from "@material-ui/core";
 import styled from "styled-components";
 import moment from "moment";
 import Reactmarkdown from "react-markdown";
-import Divider from '@material-ui/core/Divider';
-import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import Divider from "@material-ui/core/Divider";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 
 const GET_ARTICLE = gql`
   query ARTICLE($id: ID!) {
@@ -20,9 +21,12 @@ const GET_ARTICLE = gql`
       categories {
         name
       }
+      recommend
     }
   }
 `;
+
+//const UPDATE_ARTICLE = gql``;
 
 const StyledReactmarkdown = styled(Reactmarkdown)`
   img {
@@ -39,7 +43,7 @@ const RecommendButton = styled(Button)({
   background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
   color: "whitesmoke",
   width: "6vh",
-  marginTop: "3vh"
+  marginTop: "3vh",
 });
 
 const Post = () => {
@@ -53,34 +57,36 @@ const Post = () => {
   if (error) return `Error! ${error.message}`;
 
   return (
-    <Layout>
-      <Container maxWidth="sm">
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Typography
-              variant="h5"
-              gutterBottom
-              style={{ fontWeight: 500 }}
-            >
-              {data.article.title}
-            </Typography>
-            <AuthorName>Aracation&nbsp;&nbsp;·&nbsp;&nbsp;</AuthorName>
-            <Typography variant="overline" gutterBottom>
-              {moment(data.article.createdAt).locale("ko").fromNow()}
-            </Typography>
-            <Divider style={{ marginTop: '5px' }}/>
-          </Grid>          
-          <Grid item xs={12}>
-            <StyledReactmarkdown source={data.article.content} />
+    <>
+      <Head>
+        <title>{data.article.title}</title>        
+      </Head>
+      <Layout>
+        <Container maxWidth="sm">
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Typography variant="h5" gutterBottom style={{ fontWeight: 500 }}>
+                {data.article.title}
+              </Typography>
+              <AuthorName>Aracation&nbsp;&nbsp;·&nbsp;&nbsp;</AuthorName>
+              <Typography variant="overline" gutterBottom>
+                {moment(data.article.createdAt).locale("ko").fromNow()}
+              </Typography>
+              <Divider style={{ marginTop: "5px" }} />
+            </Grid>
+            <Grid item xs={12}>
+              <StyledReactmarkdown source={data.article.content} />
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid container justify="center">
-          <RecommendButton centered variant="contained">
-            <ThumbUpIcon />&nbsp;&nbsp;0
-          </RecommendButton>
-        </Grid>
-      </Container>
-    </Layout>
+          <Grid container justify="center">
+            <RecommendButton centered variant="contained">
+              <ThumbUpIcon />
+              &nbsp;&nbsp;0
+            </RecommendButton>
+          </Grid>
+        </Container>
+      </Layout>
+    </>
   );
 };
 
