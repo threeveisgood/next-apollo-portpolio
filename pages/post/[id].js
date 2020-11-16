@@ -4,12 +4,13 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { gql, useQuery } from "@apollo/client";
 import Layout from "../../components/layout";
+import List from "../../components/categoriesPostList/list";
 import { Button, Container } from "@material-ui/core";
 import styled from "styled-components";
 import moment from "moment";
 import Reactmarkdown from "react-markdown";
 import Divider from "@material-ui/core/Divider";
-import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import RelationList from "../../components/relationPostList/relationList";
 
 const GET_ARTICLE = gql`
   query ARTICLE($id: ID!) {
@@ -25,8 +26,6 @@ const GET_ARTICLE = gql`
     }
   }
 `;
-
-//const UPDATE_ARTICLE = gql``;
 
 const StyledReactmarkdown = styled(Reactmarkdown)`
   img {
@@ -55,11 +54,12 @@ const Post = () => {
 
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
-
+  
+  //console.log(data.article.categories[0].name);
   return (
     <>
       <Head>
-        <title>{data.article.title}</title>        
+        <title>{data.article.title}</title>
       </Head>
       <Layout>
         <Container maxWidth="sm">
@@ -77,14 +77,11 @@ const Post = () => {
             <Grid item xs={12}>
               <StyledReactmarkdown source={data.article.content} />
             </Grid>
-          </Grid>
-          <Grid container justify="center">
-            <RecommendButton centered variant="contained">
-              <ThumbUpIcon />
-              &nbsp;&nbsp;0
-            </RecommendButton>
-          </Grid>
-        </Container>
+          </Grid>      
+        </Container>        
+        <div style={{ marginTop: '9vh' }}>
+        <RelationList gameCategory={data.article.categories[0].name} />
+        </div>
       </Layout>
     </>
   );

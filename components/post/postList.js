@@ -31,8 +31,9 @@ export default ({ createdAt, title, previewContent, id }) => {
         alignItems="center"
         justify="center"
         spacing={1}
+        style={{ marginTop: "10px" }}
       >
-        <Grid item md={4} xs={12}>
+        <Grid item lg={3} md={4} xs={12}>
           <Link href={`post/${id}`}>
             <a style={{ textDecoration: "none" }}>
               <Card className={classes.root}>

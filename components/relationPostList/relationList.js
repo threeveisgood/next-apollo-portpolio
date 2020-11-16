@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid } from "@material-ui/core";
+import { Divider, Grid } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import PaginationItem from "@material-ui/lab/PaginationItem";
 import { gql, useQuery } from "@apollo/client";
@@ -26,9 +26,9 @@ const GET_ARTICLES = gql`
 
 const GET_AGGREGATE = gql`
   query ArticlesConnection($where: JSON!) {
-    articlesConnection(where: $where) {      
+    articlesConnection(where: $where) {
       aggregate {
-        count        
+        count
       }
     }
   }
@@ -45,7 +45,7 @@ export default ({ gameCategory }) => {
   const [pagination, setPagination] = useState(router.query.page);
 
   const handleChange = (event, value) => {
-    setPagination(value);  
+    setPagination(value);
     router.push({ pathname: `/${gameCategory}`, query: { page: `${value}` } });
   };
 
@@ -69,11 +69,7 @@ export default ({ gameCategory }) => {
   const regex = /!\[[^\]]*\]\((.*?)\s*("(?:.*[^"])")?\s*\)/g;
 
   return (
-    <Layout>
-      {data.articles.map((article) => {
-        console.log(article.content.replace(regex, ""));
-      })}
-      {console.log(LastPage)}
+    <div>      
       {data.articles.map((article) => (
         <React.Fragment>
           <PostList
@@ -111,16 +107,6 @@ export default ({ gameCategory }) => {
           </Grid>
         </Grid>
       </div>
-    </Layout>
+    </div>
   );
 };
-
-export async function getStaticProps() {
-  const apolloClient = initializeApollo();
-
-  return {
-    props: {
-      initialApolloState: apolloClient.cache.extract(),
-    },
-  };
-}

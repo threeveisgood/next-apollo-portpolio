@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    marginTop: "45px", //theme.spacing(7),
+    marginTop: "25px", //theme.spacing(7),
   },
   titleText: {
     color: "beige",
@@ -115,7 +115,7 @@ export default function Header(props) {
             <Grid item md={3}>
               <Link href="/">
                 <a className={classes.titleText}>
-                  <h2 style={{ marginBottom: "30px" }}>OmenBase</h2>
+                  <h2 style={{ marginBottom: "30px" }}>OmenCrib</h2>
                 </a>
               </Link>
             </Grid>

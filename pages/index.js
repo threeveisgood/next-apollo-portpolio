@@ -67,7 +67,7 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>OmenBase</title>
+        <title>OmenCrib</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
