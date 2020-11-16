@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import { gql, useQuery } from "@apollo/client";
 import Layout from "../../components/layout";
 import List from "../../components/categoriesPostList/list";
-import { Button, Container } from "@material-ui/core";
+import { Button, Container, CircularProgress } from "@material-ui/core";
 import styled from "styled-components";
 import moment from "moment";
 import Reactmarkdown from "react-markdown";
@@ -34,15 +34,16 @@ const StyledReactmarkdown = styled(Reactmarkdown)`
   }
 `;
 
+const ProgressWrapper = styled.div({
+  width: '100%',
+  height: '100vh',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: "center"
+})
+
 const AuthorName = styled.span({
   fontWeight: 500,
-});
-
-const RecommendButton = styled(Button)({
-  background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-  color: "whitesmoke",
-  width: "6vh",
-  marginTop: "3vh",
 });
 
 const Post = () => {
@@ -52,7 +53,7 @@ const Post = () => {
     variables: { id },
   });
 
-  if (loading) return "Loading...";
+  if (loading) return <ProgressWrapper><CircularProgress color="secondary" /></ProgressWrapper>;
   if (error) return `Error! ${error.message}`;
   
   //console.log(data.article.categories[0].name);

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Container, Grid, Typography } from "@material-ui/core";
+import React, { useState } from "react";
+import { Grid, CircularProgress } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import PaginationItem from "@material-ui/lab/PaginationItem";
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-
+import styled from "styled-components";
 import Layout from "../../components/layout";
 import { initializeApollo } from "../../apollo/client";
 import Postlist from "../../components/post/postList";
@@ -35,10 +35,19 @@ const GET_AGGREGATE = gql`
   }
 `;
 
+const ProgressWrapper = styled.div({
+  width: '100%',
+  height: '100vh',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: "center"
+})
+
+
 export default () => {
   const router = useRouter();
 
-  const postCount = 8;
+  const postCount = 15;
   const page = parseInt(router.query.page || "1", 10);
   const start = (page - 1) * postCount;
 
@@ -56,7 +65,7 @@ export default () => {
     variables: { limit: postCount, start: start },
   });
 
-  if (loading) return "Loading...";
+  if (loading) return <ProgressWrapper><CircularProgress color="primary" /></ProgressWrapper>;
   if (error) return `Error! ${error.message}`;
 
   const LastPage = Math.ceil(

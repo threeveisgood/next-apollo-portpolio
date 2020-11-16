@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, CircularProgress } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import PaginationItem from "@material-ui/lab/PaginationItem";
 import { gql, useQuery } from "@apollo/client";
@@ -34,6 +34,15 @@ const GET_AGGREGATE = gql`
   }
 `;
 
+const ProgressWrapper = styled.div({
+  width: '100%',
+  height: '100vh',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: "center"
+})
+
+
 export default ({ gameCategory }) => {
   const router = useRouter();
 
@@ -58,7 +67,7 @@ export default ({ gameCategory }) => {
     variables: { limit: postCount, start: start, where: category },
   });
 
-  if (loading) return "Loading...";
+  if (loading) return <ProgressWrapper><CircularProgress color="secondary" /></ProgressWrapper>;
   if (error) return `Error! ${error.message}`;
 
   const LastPage = Math.ceil(
@@ -70,10 +79,6 @@ export default ({ gameCategory }) => {
 
   return (
     <Layout>
-      {data.articles.map((article) => {
-        console.log(article.content.replace(regex, ""));
-      })}
-      {console.log(LastPage)}
       {data.articles.map((article) => (
         <React.Fragment>
           <PostList

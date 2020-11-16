@@ -36,21 +36,22 @@ export default ({ createdAt, title, previewContent, id }) => {
         <Grid item lg={3} md={4} xs={12}>
           <Link href={`post/${id}`}>
             <a style={{ textDecoration: "none" }}>
-              <Card className={classes.root}>
+              <Card className={classes.root}  style={{ background: 'linear-gradient(0deg, rgba(255,216,155,1) 0%, rgba(25,84,123,1) 100%)'}}>
                 <CardContent>
                   <Typography
                     className={classes.information}
                     color="textSecondary"
                     gutterBottom
+                    style={{ color: 'gainsboro' }}
                   >
                     Posted By Aracation &nbsp;
                     {moment(createdAt).locale("ko").fromNow()}
                   </Typography>
-                  <Typography variant="h6" component="h2">
+                  <Typography variant="h6" component="h2" style={{ color: 'wheat' }}>
                     {title}
                   </Typography>
                   <br />
-                  <Typography variant="body2" component="p">
+                  <Typography variant="body2" component="p" style={{ color: 'lightyellow' }}>
                     {previewContent}..
                   </Typography>
                 </CardContent>

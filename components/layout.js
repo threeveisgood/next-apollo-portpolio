@@ -34,21 +34,23 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     //backgroundColor: "#F0EFF3",
+    background: 'linear-gradient(0deg, rgba(255,216,155,1) 0%, rgba(25,84,123,1) 100%)',
+    color: 'honeydew'
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     height: "55px",
-    background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+    background: "linear-gradient(0deg, rgba(76,161,175,1) 0%, rgba(196,224,229,1) 100%)",
     boxShadow: "none",
     marginBottom: "0",
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    marginTop: "25px", //theme.spacing(7),
+    marginTop: theme.spacing(5),
   },
   titleText: {
-    color: "beige",
+    color: "ghostwhite",
     textDecoration: "none",
   },
   tabs: {
