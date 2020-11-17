@@ -87,7 +87,7 @@ export default ({ gameCategory }) => {
             createdAt={article.createdAt}
             previewContent={article.content
               .replace(regex, "")
-              .substring(0, 100)}
+              .substring(0, 100)}            
           />
         </React.Fragment>
       ))}

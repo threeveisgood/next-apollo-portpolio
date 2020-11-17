@@ -8,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import { Grid } from "@material-ui/core";
 import moment from "moment";
 import Link from "next/link"
-import { useRouter } from 'next/router';
 
 const useStyles = makeStyles({
   root: {
@@ -19,8 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default ({ createdAt, title, previewContent, id }) => {
-  const router = useRouter()
+export default ({ createdAt, title, previewContent, id }) => {  
   const classes = useStyles();
 
   return (
@@ -34,7 +32,7 @@ export default ({ createdAt, title, previewContent, id }) => {
         style={{ marginTop: "10px" }}
       >
         <Grid item lg={3} md={4} xs={12}>
-          <Link href={`post/${id}`}>
+          <Link href={`../post/${id}`}>
             <a style={{ textDecoration: "none" }}>
               <Card className={classes.root}  style={{ background: 'linear-gradient(0deg, rgba(255,216,155,1) 0%, rgba(25,84,123,1) 100%)'}}>
                 <CardContent>
