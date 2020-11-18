@@ -9,6 +9,7 @@ import styled from "styled-components";
 import Layout from "../layout";
 import { initializeApollo } from "../../apollo/client";
 import PostList from "../post/postList";
+import LoadingProgress from "../loadingProgress";
 
 const GET_ARTICLES = gql`
   query Articles($start: Int!, $limit: Int!, $where: JSON!) {
@@ -67,7 +68,7 @@ export default ({ gameCategory }) => {
     variables: { limit: postCount, start: start, where: category },
   });
 
-  if (loading) return <ProgressWrapper><CircularProgress color="secondary" /></ProgressWrapper>;
+  if (loading) return <LoadingProgress />;
   if (error) return `Error! ${error.message}`;
 
   const LastPage = Math.ceil(

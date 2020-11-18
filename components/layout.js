@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     height: "55px",
-    background: "linear-gradient(0deg, rgba(76,161,175,1) 0%, rgba(196,224,229,1) 100%)",
+    background: "linear-gradient(0deg, rgba(255,216,155,1) 0%, rgba(25,84,123,1) 100%)",
     boxShadow: "none",
     marginBottom: "0",
   },

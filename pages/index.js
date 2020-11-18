@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import Layout from "../components/layout";
 import { initializeApollo } from "../apollo/client";
 import Postlist from "../components/post/postList";
+import LoadingProgress from "../components/loadingProgress";
 
 
 const GET_ARTICLES = gql`
@@ -56,7 +57,7 @@ export default function Home() {
     variables: { limit: postCount, start: start },
   });
 
-  if (loading) return "Loading...";
+  if (loading) return <LoadingProgress />;
   if (error) return `Error! ${error.message}`;
 
   const LastPage = Math.ceil(
