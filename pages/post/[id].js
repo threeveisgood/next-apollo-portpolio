@@ -1,3 +1,4 @@
+import React from 'react'
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Typography from "@material-ui/core/Typography";
@@ -11,6 +12,7 @@ import moment from "moment";
 import Reactmarkdown from "react-markdown";
 import Divider from "@material-ui/core/Divider";
 import RelationList from "../../components/relationPostList/relationList";
+import Comments from '../../components/comments';
 
 const GET_ARTICLE = gql`
   query ARTICLE($id: ID!) {
@@ -79,10 +81,11 @@ const Post = () => {
               <StyledReactmarkdown source={data.article.content} />
             </Grid>
           </Grid>      
-        </Container>        
+          <Comments fullUrl={'https://omencrib.vercel.app/post'} id={id} />
+        </Container>                
         <div style={{ marginTop: '9vh' }}>
         <RelationList gameCategory={data.article.categories[0].name} />
-        </div>
+        </div>        
       </Layout>
     </>
   );
