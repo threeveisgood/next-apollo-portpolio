@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { fade, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   title: {
-    //display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block",
     },
@@ -33,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     display: "flex",
-    //backgroundColor: "#F0EFF3",
     background: 'linear-gradient(0deg, rgba(255,216,155,1) 0%, rgba(25,84,123,1) 100%)',
     color: 'honeydew'
   },

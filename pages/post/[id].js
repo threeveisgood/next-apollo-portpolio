@@ -5,8 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { gql, useQuery } from "@apollo/client";
 import Layout from "../../components/layout";
-import List from "../../components/categoriesPostList/list";
-import { Button, Container, CircularProgress } from "@material-ui/core";
+import { Container, CircularProgress } from "@material-ui/core";
 import styled from "styled-components";
 import moment from "moment";
 import Reactmarkdown from "react-markdown";
@@ -58,7 +57,6 @@ const Post = () => {
   if (loading) return <ProgressWrapper><CircularProgress color="secondary" /></ProgressWrapper>;
   if (error) return `Error! ${error.message}`;
   
-  //console.log(data.article.categories[0].name);
   return (
     <>
       <Head>

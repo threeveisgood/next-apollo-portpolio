@@ -1,6 +1,6 @@
 import Head from "next/head";
-import React, { useState, useEffect } from "react";
-import { Container, Grid, Typography } from "@material-ui/core";
+import React, { useState } from "react";
+import { Grid } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import PaginationItem from "@material-ui/lab/PaginationItem";
 import { gql, useQuery } from "@apollo/client";
@@ -116,12 +116,7 @@ export default function Home() {
 
 export async function getStaticProps() {
   const apolloClient = initializeApollo();
-
-  // await apolloClient.query({
-  //   query: GET_ARTICLES,
-  //   query: GET_AGGREGATE
-  // })
-
+s
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),

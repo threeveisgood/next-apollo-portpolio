@@ -55,7 +55,6 @@ export default () => {
 
   const handleChange = (event, value) => {
     setPagination(value);
-    //router.push("/post?page=" + value);
     router.push({ pathname: `/post`, query: { page: `${value}` } })
   };
 
@@ -72,9 +71,6 @@ export default () => {
     dataA.articlesConnection.aggregate.count / postCount
   );
 
-  //console.log(router.query.page);
-
-  //Markdown Image Regex 
   const regex = /!\[[^\]]*\]\((.*?)\s*("(?:.*[^"])")?\s*\)/g
 
   return (
@@ -120,12 +116,7 @@ export default () => {
 
 export async function getStaticProps() {
   const apolloClient = initializeApollo();
-
-  // await apolloClient.query({
-  //   query: GET_ARTICLES,
-  //   query: GET_AGGREGATE
-  // })
-
+  
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),

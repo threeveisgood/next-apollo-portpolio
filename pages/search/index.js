@@ -116,16 +116,6 @@ export default () => {
   );
 };
 
-// export async function getStaticProps() {
-//   const apolloClient = initializeApollo();
-
-//   return {
-//     props: {
-//       initialApolloState: apolloClient.cache.extract(),
-//     },
-//   };
-// }
-
 export async function getServerSideProps() {
   const apolloClient = initializeApollo();
 
