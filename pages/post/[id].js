@@ -78,8 +78,10 @@ const Post = () => {
             <Grid item xs={12}>
               <StyledReactmarkdown source={data.article.content} />
             </Grid>
-          </Grid>      
+          </Grid>  
+          <div style={{ marginTop: '3vh' }}>    
           <Comments fullUrl={'https://omencrib.vercel.app/post'} id={id} />
+          </div>
         </Container>                
         <div style={{ marginTop: '9vh' }}>
         <RelationList gameCategory={data.article.categories[0].name} />

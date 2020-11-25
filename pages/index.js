@@ -116,7 +116,7 @@ export default function Home() {
 
 export async function getStaticProps() {
   const apolloClient = initializeApollo();
-s
+
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
