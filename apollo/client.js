@@ -4,7 +4,7 @@ import {
 } from "@apollo/client"
 import { useMemo } from 'react'
 
-const GRAPHQL_URL = process.env.API_URL || "https://calm-dawn-07564.herokuapp.com"
+const GRAPHQL_URL = "http://localhost:1337" || process.env.API_URL
 
 let apolloClient
 
@@ -45,7 +45,3 @@ export function useApollo(initialState) {
     return store
 }
 
-/*
-in use case, _app.js : const client = useApollo(pageProps.initialApolloState)
-    or const apolloClient = useApollo(pageProps.initialApolloState)
-*/
