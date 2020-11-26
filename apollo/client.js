@@ -4,7 +4,7 @@ import {
 } from "@apollo/client"
 import { useMemo } from 'react'
 
-const GRAPHQL_URL = "http://localhost:1337" || process.env.API_URL
+const GRAPHQL_URL = process.env.API_URL || "http://localhost:1337" 
 
 let apolloClient
 
