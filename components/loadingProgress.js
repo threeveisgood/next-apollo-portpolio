@@ -13,7 +13,7 @@ const ProgressWrapper = styled.div({
 const loadingProgress = () => {
     return (
         <div>
-          <ProgressWrapper><CircularProgress color="secondary" /></ProgressWrapper>            
+          <ProgressWrapper><CircularProgress color="primary" /></ProgressWrapper>            
         </div>
     );
 };

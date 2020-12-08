@@ -32,20 +32,19 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     display: "flex",
-    background: 'linear-gradient(0deg, rgba(255,216,155,1) 0%, rgba(25,84,123,1) 100%)',
-    color: 'honeydew'
+    background: 'linear-gradient(0deg, rgba(142,123,161,1) 0%, rgba(84,121,184,1) 100%)',    
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     height: "55px",
-    background: "linear-gradient(0deg, rgba(255,216,155,1) 0%, rgba(25,84,123,1) 100%)",
+    background: "linear-gradient(0deg, rgba(142,123,161,1) 0%, rgba(84,121,184,1) 100%)",
     boxShadow: "none",
     marginBottom: "0",
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    marginTop: theme.spacing(5),
+    marginTop: theme.spacing(3),
   },
   titleText: {
     color: "ghostwhite",

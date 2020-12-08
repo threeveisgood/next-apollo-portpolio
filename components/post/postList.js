@@ -34,7 +34,7 @@ export default ({ createdAt, title, previewContent, id }) => {
         <Grid item lg={3} md={4} xs={12}>
           <Link href={`../post/${id}`}>
             <a style={{ textDecoration: "none" }}>
-              <Card className={classes.root}  style={{ background: 'linear-gradient(0deg, rgba(255,216,155,1) 0%, rgba(25,84,123,1) 100%)'}}>
+              <Card className={classes.root}  style={{ background: 'linear-gradient(0deg, rgba(142,123,161,1) 0%, rgba(84,121,184,1) 100%)'}}>
                 <CardContent>
                   <Typography
                     className={classes.information}
@@ -45,11 +45,11 @@ export default ({ createdAt, title, previewContent, id }) => {
                     Posted By Aracation &nbsp;
                     {moment(createdAt).locale("ko").fromNow()}
                   </Typography>
-                  <Typography variant="h6" component="h2" style={{ color: 'wheat' }}>
+                  <Typography variant="h6" component="h2" style={{ color: 'floralwhite' }}>
                     {title}
                   </Typography>
                   <br />
-                  <Typography variant="body2" component="p" style={{ color: 'lightyellow' }}>
+                  <Typography variant="body2" component="p" style={{ color: 'white' }}>
                     {previewContent}..
                   </Typography>
                 </CardContent>

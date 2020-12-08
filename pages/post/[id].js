@@ -64,7 +64,7 @@ const Post = () => {
       </Head>
       <Layout>
         <Container maxWidth="sm">
-          <Grid container spacing={3}>
+          <Grid container spacing={3} style={{ color: 'white' }}>
             <Grid item xs={12}>
               <Typography variant="h5" gutterBottom style={{ fontWeight: 500 }}>
                 {data.article.title}

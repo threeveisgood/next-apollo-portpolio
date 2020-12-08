@@ -66,7 +66,7 @@ export const SearchMobile = () => {
       <Grid item align="center">
         <Link href="/">
           <a className={classes.titleText}>
-            <h2 style={{ marginBottom: "30px" }}>OmenBase</h2>
+            <h2 style={{ marginBottom: "30px" }}>OmenCrib</h2>
           </a>
         </Link>
       </Grid>
