@@ -52,7 +52,7 @@ export default function Home() {
   };
 
   const { data: dataA } = useQuery(GET_AGGREGATE, {
-    fetchPolicy: "network-only"
+    fetchPolicy: "network-only",
   });
 
   const { loading, error, data } = useQuery(GET_ARTICLES, {

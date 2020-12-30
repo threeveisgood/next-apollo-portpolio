@@ -60,6 +60,7 @@ export default ({ gameCategory }) => {
 
   const { data: dataA } = useQuery(GET_AGGREGATE, {
     variables: { where: category },
+    fetchPolicy: "network-only",    
   });
 
   const { loading, error, data } = useQuery(GET_ARTICLES, {

@@ -63,7 +63,7 @@ export default () => {
 
   const { data: dataA } = useQuery(GET_SEARCH_AGGREGATE, {
     variables: { where: searchValue },
-    fetchPolicy: "network-only"
+    fetchPolicy: "network-only",    
   });
 
   const { loading, error, data } = useQuery(GET_SEARCH_RESULT, {
