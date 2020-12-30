@@ -50,7 +50,7 @@ export default function Home() {
     setPagination(value);
     router.push({ pathname: `/post`, query: { page: `${value}` } })
   };
-
+  
   const { data: dataA } = useQuery(GET_AGGREGATE, {
     fetchPolicy: "network-only",
   });
@@ -118,6 +118,11 @@ export default function Home() {
 
 export async function getStaticProps() {
   const apolloClient = initializeApollo();
+
+  // await apolloClient.query({
+  //   query: GET_ARTICLES,
+
+  // })
 
   return {
     props: {

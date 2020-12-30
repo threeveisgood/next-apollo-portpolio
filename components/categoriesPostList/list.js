@@ -59,11 +59,10 @@ export default ({ gameCategory }) => {
     router.push({ pathname: `/${gameCategory}`, query: { page: `${value}` } });
   };
 
-  const { data: dataA } = useQuery(GET_AGGREGATE, {
+  const { loading: loadingA, error: errorA, data: dataA } = useQuery(GET_AGGREGATE, {
     variables: { where: category },
     fetchPolicy: "network-only"    
-  });  
-
+  });
   
   const { loading, error, data } = useQuery(GET_ARTICLES, {
     //
@@ -71,12 +70,13 @@ export default ({ gameCategory }) => {
   });
 
 
-  if (loading) return <LoadingProgress />;
-  if (error) return `Error! ${error.message}`;  
+  if (loading || loadingA) return <LoadingProgress />;
+  if (error || errorA) return `Error! ${error.message}`;  
 
   const LastPage = Math.ceil(
     dataA.articlesConnection.aggregate.count / postCount
   );
+
   //Markdown Image Regex
   const regex = /!\[[^\]]*\]\((.*?)\s*("(?:.*[^"])")?\s*\)/g;
 
