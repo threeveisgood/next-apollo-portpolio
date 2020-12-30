@@ -58,7 +58,7 @@ export default ({ gameCategory }) => {
     router.push({ pathname: `/${gameCategory}`, query: { page: `${value}` } });
   };
 
-  const { data: dataA } = useQuery(GET_AGGREGATE, {
+  const { loading: loadingA, error: errorA, data: dataA } = useQuery(GET_AGGREGATE, {
     variables: { where: category },
     fetchPolicy: "network-only",    
   });
@@ -68,8 +68,8 @@ export default ({ gameCategory }) => {
     variables: { limit: postCount, start: start, where: category },
   });
 
-  if (loading) return <ProgressWrapper><CircularProgress color="secondary" /></ProgressWrapper>;
-  if (error) return `Error! ${error.message}`;
+  if (loading || loadingA) return <ProgressWrapper><CircularProgress color="secondary" /></ProgressWrapper>;
+  if (error || errorA) return `Error! ${error.message}`;
 
   const LastPage = Math.ceil(
     dataA.articlesConnection.aggregate.count / postCount
