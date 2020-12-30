@@ -51,7 +51,7 @@ export default function Home() {
     router.push({ pathname: `/post`, query: { page: `${value}` } })
   };
   
-  const { data: dataA } = useQuery(GET_AGGREGATE, {
+  const {  loading: loadingA, error: errorA, data: dataA } = useQuery(GET_AGGREGATE, {
     fetchPolicy: "network-only",
   });
 
@@ -59,8 +59,8 @@ export default function Home() {
     variables: { limit: postCount, start: start },
   });
 
-  if (loading) return <LoadingProgress />;
-  if (error) return `Error! ${error.message}`;
+  if (loading || loadingA) return <LoadingProgress />;
+  if (error || errorA) return `Error! ${error.message}`;
 
   const LastPage = Math.ceil(
     dataA.articlesConnection.aggregate.count / postCount

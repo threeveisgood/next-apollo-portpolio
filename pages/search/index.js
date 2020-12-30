@@ -61,7 +61,7 @@ export default () => {
     });
   };
 
-  const { data: dataA } = useQuery(GET_SEARCH_AGGREGATE, {
+  const { loading: loadingA, error: errorA, data: dataA } = useQuery(GET_SEARCH_AGGREGATE, {
     variables: { where: searchValue },
     fetchPolicy: "network-only",    
   });
@@ -70,8 +70,8 @@ export default () => {
     variables: { limit: postCount, start: start, where: searchValue },
   });
 
-  if (loading) return <ProgressWrapper><CircularProgress color="primary" /></ProgressWrapper>;
-  if (error) return `Error! ${error.message}`;
+  if (loading || loadingA) return <ProgressWrapper><CircularProgress color="primary" /></ProgressWrapper>;
+  if (error || errorA) return `Error! ${error.message}`;
 
   const LastPage = Math.ceil(
     dataA.articlesConnection.aggregate.count / postCount
