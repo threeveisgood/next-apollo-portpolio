@@ -51,7 +51,9 @@ export default function Home() {
     router.push({ pathname: `/post`, query: { page: `${value}` } })
   };
 
-  const { data: dataA } = useQuery(GET_AGGREGATE);
+  const { data: dataA } = useQuery(GET_AGGREGATE, {
+    fetchPolicy: "network-only"
+  });
 
   const { loading, error, data } = useQuery(GET_ARTICLES, {
     variables: { limit: postCount, start: start },

@@ -61,24 +61,25 @@ export default ({ gameCategory }) => {
 
   const { data: dataA } = useQuery(GET_AGGREGATE, {
     variables: { where: category },
-  });
+  });  
 
+  
   const { loading, error, data } = useQuery(GET_ARTICLES, {
     //
     variables: { limit: postCount, start: start, where: category },
   });
 
+
   if (loading) return <LoadingProgress />;
-  if (error) return `Error! ${error.message}`;
+  if (error) return `Error! ${error.message}`;  
 
   const LastPage = Math.ceil(
     dataA.articlesConnection.aggregate.count / postCount
   );
-
   //Markdown Image Regex
   const regex = /!\[[^\]]*\]\((.*?)\s*("(?:.*[^"])")?\s*\)/g;
 
-  return (
+  return (      
     <Layout>
       {data.articles.map((article) => (
         <React.Fragment>

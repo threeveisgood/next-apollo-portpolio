@@ -31,7 +31,7 @@ export default ({ createdAt, title, previewContent, id }) => {
         spacing={1}
         style={{ marginTop: "10px" }}
       >
-        <Grid item lg={3} md={4} xs={12}>
+        <Grid item lg={3} md={4} xs={8} >
           <Link href={`../post/${id}`}>
             <a style={{ textDecoration: "none" }}>
               <Card className={classes.root}  style={{ background: 'linear-gradient(0deg, rgba(142,123,161,1) 0%, rgba(84,121,184,1) 100%)'}}>
