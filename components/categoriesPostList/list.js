@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 import Layout from "../layout";
 import { initializeApollo } from "../../apollo/client";
-import PostList from "../post/postList";
+import Postlist from "../post/postList";
 import LoadingProgress from "../loadingProgress";
 
 const GET_ARTICLES = gql`
@@ -27,27 +27,19 @@ const GET_ARTICLES = gql`
 
 const GET_AGGREGATE = gql`
   query ArticlesConnection($where: JSON!) {
-    articlesConnection(where: $where) {      
+    articlesConnection(where: $where) {
       aggregate {
-        count        
+        count
+        totalCount
       }
     }
   }
 `;
 
-const ProgressWrapper = styled.div({
-  width: '100%',
-  height: '100vh',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: "center"
-})
-
-
 export default ({ gameCategory }) => {
   const router = useRouter();
 
-  const postCount = 3;
+  const postCount = 8;
   const page = parseInt(router.query.page || "1", 10);
   const start = (page - 1) * postCount;
   const category = { categories: { name: `${gameCategory}` } };
@@ -55,36 +47,37 @@ export default ({ gameCategory }) => {
   const [pagination, setPagination] = useState(router.query.page);
 
   const handleChange = (event, value) => {
-    setPagination(value);  
+    setPagination(value);
     router.push({ pathname: `/${gameCategory}`, query: { page: `${value}` } });
   };
 
-  const { loading: loadingA, error: errorA, data: dataA } = useQuery(GET_AGGREGATE, {
-    variables: { where: category },
-    fetchPolicy: "network-only"    
-  });
-  
+  const { loading: loadingA, error: errorA, data: dataA } = useQuery(
+    GET_AGGREGATE,
+    {
+      variables: { where: category },
+    }
+  );
+
   const { loading, error, data } = useQuery(GET_ARTICLES, {
-    //
     variables: { limit: postCount, start: start, where: category },
   });
 
-
   if (loading || loadingA) return <LoadingProgress />;
-  if (error || errorA) return `Error! ${error.message}`;  
+  if (error || errorA) return `Error! ${error.message}`;
 
   const LastPage = Math.ceil(
     dataA.articlesConnection.aggregate.count / postCount
   );
 
-  //Markdown Image Regex
+  const realData = data.articles.filter((element) => element != null);
+
   const regex = /!\[[^\]]*\]\((.*?)\s*("(?:.*[^"])")?\s*\)/g;
 
-  return (      
+  return (
     <Layout>
-      {data.articles.map((article) => (
+      {realData.map((article) => (
         <React.Fragment>
-          <PostList
+          <Postlist
             id={article.id}
             title={article.title}
             createdAt={article.createdAt}

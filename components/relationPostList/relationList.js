@@ -6,8 +6,6 @@ import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
-import Layout from "../layout";
-import { initializeApollo } from "../../apollo/client";
 import PostList from "../post/postList";
 
 const GET_ARTICLES = gql`
@@ -46,7 +44,7 @@ const ProgressWrapper = styled.div({
 export default ({ gameCategory }) => {
   const router = useRouter();
 
-  const postCount = 3;
+  const postCount = 8;
   const page = parseInt(router.query.page || "1", 10);
   const start = (page - 1) * postCount;
   const category = { categories: { name: `${gameCategory}` } };
@@ -59,8 +57,7 @@ export default ({ gameCategory }) => {
   };
 
   const { loading: loadingA, error: errorA, data: dataA } = useQuery(GET_AGGREGATE, {
-    variables: { where: category },
-    fetchPolicy: "network-only",    
+    variables: { where: category },      
   });
 
   const { loading, error, data } = useQuery(GET_ARTICLES, {
@@ -75,12 +72,13 @@ export default ({ gameCategory }) => {
     dataA.articlesConnection.aggregate.count / postCount
   );
 
+  const realData = data.articles.filter((element) => element != null);
   //Markdown Image Regex
   const regex = /!\[[^\]]*\]\((.*?)\s*("(?:.*[^"])")?\s*\)/g;
 
   return (
     <div>      
-      {data.articles.map((article) => (
+      {realData.map((article) => (
         <React.Fragment>
           <PostList
             id={article.id}

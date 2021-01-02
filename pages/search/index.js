@@ -45,7 +45,7 @@ const ProgressWrapper = styled.div({
 export default () => {
   const router = useRouter();
 
-  const postCount = 6;
+  const postCount = 4;
   const page = parseInt(router.query.page || "1", 10);
   const start = (page - 1) * postCount;
   const { search_value } = router.query;

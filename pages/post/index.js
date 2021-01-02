@@ -9,7 +9,6 @@ import Layout from "../../components/layout";
 import { initializeApollo } from "../../apollo/client";
 import Postlist from "../../components/post/postList";
 
-
 const GET_ARTICLES = gql`
   query Articles($start: Int!, $limit: Int!) {
     articles(start: $start, limit: $limit) {
@@ -29,25 +28,23 @@ const GET_AGGREGATE = gql`
     articlesConnection {
       aggregate {
         count
-        totalCount
       }
     }
   }
 `;
 
 const ProgressWrapper = styled.div({
-  width: '100%',
-  height: '100vh',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: "center"
-})
-
+  width: "100%",
+  height: "100vh",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+});
 
 export default () => {
   const router = useRouter();
 
-  const postCount = 15;
+  const postCount = 8;
   const page = parseInt(router.query.page || "1", 10);
   const start = (page - 1) * postCount;
 
@@ -55,25 +52,29 @@ export default () => {
 
   const handleChange = (event, value) => {
     setPagination(value);
-    router.push({ pathname: `/post`, query: { page: `${value}` } })
+    router.push({ pathname: `/post`, query: { page: `${value}` } });
   };
 
-  const { loading: loadingA, error: errorA, data: dataA } = useQuery(GET_AGGREGATE, {
-    fetchPolicy: "network-only",    
-  });
+  const { loading: loadingA, error: errorA, data: dataA } = useQuery(
+    GET_AGGREGATE
+  );
 
   const { loading, error, data } = useQuery(GET_ARTICLES, {
     variables: { limit: postCount, start: start },
   });
 
-  if (loading || loadingA) return <ProgressWrapper><CircularProgress color="primary" /></ProgressWrapper>;
+  if (loading || loadingA)
+    return (
+      <ProgressWrapper>
+        <CircularProgress color="primary" />
+      </ProgressWrapper>
+    );
   if (error || errorA) return `Error! ${error.message}`;
 
   const LastPage = Math.ceil(
     dataA.articlesConnection.aggregate.count / postCount
-  );
-
-  const regex = /!\[[^\]]*\]\((.*?)\s*("(?:.*[^"])")?\s*\)/g
+  );    
+  const regex = /!\[[^\]]*\]\((.*?)\s*("(?:.*[^"])")?\s*\)/g;
 
   return (
     <Layout>
@@ -83,7 +84,9 @@ export default () => {
             id={article.id}
             title={article.title}
             createdAt={article.createdAt}
-            previewContent={(article.content.replace(regex, '').substring(0,100))}            
+            previewContent={article.content
+              .replace(regex, "")
+              .substring(0, 100)}
           />
         </React.Fragment>
       ))}
@@ -118,7 +121,7 @@ export default () => {
 
 export async function getStaticProps() {
   const apolloClient = initializeApollo();
-  
+
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),

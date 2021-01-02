@@ -1,12 +1,12 @@
 import React from 'react';
 import List from '../../components/categoriesPostList/list';
 
-const mobile = () => {
+const household = () => {
     return (
         <div>
-           <List gameCategory={"mobile"} />
+           <List gameCategory={"household"} />
         </div>
     );
 };
 
-export default mobile;
+export default household;

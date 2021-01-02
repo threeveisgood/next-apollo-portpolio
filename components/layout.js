@@ -75,28 +75,28 @@ export default function Header(props) {
 
   const tabs = [
     {
-      label: "전체 목록",
+      label: "All",
       link: "/post",
     },
     {
-      label: "PC",
-      link: "/pc",
+      label: "Food",
+      link: "/food",
     },
     {
-      label: "Switch",
-      link: "/nintendo",
+      label: "Clothing",
+      link: "/clothing",
     },
     {
-      label: "PS5",
-      link: "/playstation",
+      label: "Electronics",
+      link: "/electronics",
     },
     {
-      label: "Moblie",
-      link: "/mobile",
+      label: "Beauty",
+      link: "/beauty",
     },
     {
-      label: "Xbox",
-      link: "/xbox",
+      label: "Household",
+      link: "/household",
     },
   ];
 
@@ -139,6 +139,7 @@ export default function Header(props) {
                 <Link href={`${tab.link}`}>
                   <a style={{ textDecoration: "none" }}>
                     <Tab
+                      id={index}
                       value={index}
                       label={tab.label}
                       {...a11yProps(index)}
