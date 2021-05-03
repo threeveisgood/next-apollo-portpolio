@@ -10,6 +10,6 @@ module.exports = {
         return cfg;
     },
     env: {
-        API_URL: 'https://calm-dawn-07564.herokuapp.com'
+        API_URL: ''
     }    
 }
